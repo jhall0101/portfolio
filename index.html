@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><plasmo-csui id="jobright-helper-plugin"></plasmo-csui><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JH_TERMINAL_V8.1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script><style type="text/css" id="operaUserStyle"></style>
     <style>
         :root {
             --bg: #030508; --surface: #0a0f16; --border: #1a2633;
@@ -58,16 +57,19 @@
         .edit-mode .admin-actions { display: flex; }
         .login-trigger { position: fixed; bottom: 20px; right: 20px; opacity: 0.05; cursor: pointer; font-size: 10px; }
     </style>
-</head>
-<body>
+<style type="text/css"></style></head>
+<body data-new-gr-c-s-check-loaded="14.1280.0" data-gr-ext-installed=""  data-new-gr-c-s-loaded="14.1280.0">
 
-<div id="detail-modal" onclick="closeModal()">
+<div id="detail-modal" onclick="closeModal()" style="display: none;">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <div class="tagline" id="modal-cat"></div>
-        <h2 id="modal-title" style="font-size: 42px; margin: 10px 0; text-transform: uppercase;"></h2>
-        <div class="modal-gallery" id="modal-gallery"></div>
-        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px;"></div>
-        <div class="modal-links" id="modal-links"></div>
+        <div class="tagline" id="modal-cat">DATA_ENTRY // CAREER</div>
+        <h2 id="modal-title" style="font-size: 42px; margin: 10px 0; text-transform: uppercase;">Elevated Candles &lt;i data-lucide="flame"&gt;&lt;/i&gt;</h2>
+        <div class="modal-gallery" id="modal-gallery"><img src="fall fantasy.png"></div>
+        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px;"><b>Technical Breakdown:</b>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg> SQL Server optimization
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bar-chart-3" aria-hidden="true" class="lucide lucide-bar-chart-3"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg> Tableau Dashboard design
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trending-up" aria-hidden="true" class="lucide lucide-trending-up"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg> 40% growth in efficiency.</div>
+        <div class="modal-links" id="modal-links"><a href="https" target="_blank" class="btn">Instagram</a><a href="https" target="_blank" class="btn">YouTube</a></div>
         <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="closeModal()">Close_Terminal</button>
     </div>
 </div>
@@ -80,11 +82,17 @@
     </header>
 
     <div class="nav-zone">
-        <div class="filter-list" id="filter-bar"></div>
+        <div class="filter-list" id="filter-bar">
+            <button class="filter-btn active" onclick="setFilter('ALL')">ALL</button>
+        
+            <button class="filter-btn " onclick="setFilter('CAREER')">CAREER</button>
+        
+            <button class="filter-btn " onclick="setFilter('CREATIVE')">CREATIVE</button>
+        </div>
         <button class="btn" onclick="unlockAdmin()" id="lock-btn" style="opacity:0.3; border-color:var(--muted); color:var(--muted)">Admin_Access</button>
     </div>
 
-    <div id="admin-panel" class="admin-bar">
+    <div id="admin-panel" class="admin-bar" style="display: none;">
         <div class="input-group" style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
             <input type="text" id="p-title" placeholder="PROJECT_NAME">
             <input type="text" id="p-category" placeholder="DOMAIN (e.g. VISUALS)">
@@ -95,21 +103,43 @@
         <textarea id="p-detail" rows="6" placeholder="FULL_LOG_DETAIL (Rendered as HTML)"></textarea>
         
         <div style="display:flex; gap:10px;">
-            <button class="btn" onclick="saveProject()" id="main-save-btn">Sync_To_Mainframe</button>
+            <button class="btn" onclick="saveProject()" id="main-save-btn">Update_Entry</button>
             <button class="btn" onclick="exportFinalHTML()">Download HTML</button>
-            <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display:none">Abort</button>
+            <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display: block;">Abort</button>
         </div>
     </div>
 
-    <div class="grid" id="project-grid"></div>
+    <div class="grid" id="project-grid">
+            <div class="card">
+                <img src="fall fantasy.png" class="card-img">
+                <div class="card-tag">// CAREER</div>
+                <div class="card-title">Elevated Candles <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="flame" aria-hidden="true" class="lucide lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div>
+                <div class="card-desc">Founder &amp; Data Lead. Developed forecasting models and KPI dashboards.</div>
+                <button class="btn" onclick="openModal(1)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" aria-hidden="true" size="14" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="startEdit(1)">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteProject(1)">Delete</button>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="y_files - logo.png" class="card-img">
+                <div class="card-tag">// CREATIVE</div>
+                <div class="card-title">THE Y FILES <i data-lucide="SEARCH"></i></div>
+                <div class="card-desc">TEST</div>
+                <button class="btn" onclick="openModal(1775654838301)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" aria-hidden="true" size="14" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="startEdit(1775654838301)">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteProject(1775654838301)">Delete</button>
+                </div>
+            </div>
+        </div>
 </div>
 
 <div class="login-trigger" onclick="unlockAdmin()">[ENCRYPTED_LINK]</div>
 
 <script>
-    let projects = [
-        { id: 1, title: "Elevated Candles", category: "CAREER", desc: "Founder & Data Lead. Developed forecasting models and KPI dashboards.", detail: "<b>Technical Breakdown:</b>\n<i data-lucide='cpu'></i> SQL Server optimization\n<i data-lucide='bar-chart-3'></i> Tableau Dashboard design\n<i data-lucide='trending-up'></i> 40% growth in efficiency.", img: "", links: "Visit Store: https://example.com" }
-    ];
+    let projects = [{"id":1,"title":"Elevated Candles <i data-lucide=\"flame\"></i>","category":"CAREER","desc":"Founder & Data Lead. Developed forecasting models and KPI dashboards.","detail":"<b>Technical Breakdown:</b>\n<i data-lucide='cpu'></i> SQL Server optimization\n<i data-lucide='bar-chart-3'></i> Tableau Dashboard design\n<i data-lucide='trending-up'></i> 40% growth in efficiency.","img":"fall fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/, YouTube: https://www.youtube.com/@Elevatedcandles/videos"},{"id":1775654838301,"title":"THE Y FILES <i data-lucide=\"SEARCH\"></i>","category":"CREATIVE","desc":"TEST","detail":"TEST","img":"y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/ ,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"}];
     
     let editingId = null;
     let currentFilter = 'ALL';
@@ -229,5 +259,6 @@
     }
     render();
 </script>
-</body>
-</html>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
