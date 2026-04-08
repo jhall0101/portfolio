@@ -1,216 +1,157 @@
 <!DOCTYPE html>
-<!-- saved from url=(0060)file:///C:/Users/PC/Documents/Jobs/2026/Portfolio/index.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Portfolio — John Hall</title>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="./Portfolio — John Hall_files/css2" rel="stylesheet">
-<script src="./Portfolio — John Hall_files/lucide@latest"></script><style type="text/css" id="operaUserStyle"></style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
   :root {
-    --bg: #080b10;
-    --surface: #0d1117;
-    --surface2: #141b24;
-    --border: rgba(255,255,255,0.07);
-    --accent: #00e5ff; /* Alliance Blue */
-    --accent2: #ff9d00; /* Cerberus Orange */
+    --bg: #05070a;
+    --surface: #0a0f16;
+    --border: rgba(0, 229, 255, 0.1);
+    --accent: #00e5ff;
     --text: #e8edf5;
     --muted: #5a6478;
     --mono: 'DM Mono', monospace;
     --display: 'Syne', sans-serif;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--display);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Noise & Grid Overlays */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-
-  header { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+  body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; min-height: 100vh; overflow-x: hidden; }
   
-  .header-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
+  /* Sci-Fi Grid & Noise */
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"); pointer-events: none; z-index: 10; }
+  body::after { content: ''; position: fixed; inset: 0; background: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
 
-  h1 { font-size: clamp(42px, 6vw, 78px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+  .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
   
-  #site-name, #site-tagline {
-    background: none; border: none; color: inherit; font: inherit; outline: none; width: 100%;
-  }
-  #site-tagline { color: var(--muted); font-size: 0.52em; margin-top: 8px; }
+  header { border-left: 3px solid var(--accent); padding-left: 24px; margin-bottom: 60px; }
+  .label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: 64px; margin: 0; font-weight: 800; line-height: 1; }
+  .tagline { color: var(--muted); font-size: 24px; margin-top: 10px; }
 
-  .controls { display: flex; align-items: center; gap: 12px; padding: 24px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-  .filter-btn, .add-btn {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-    background: none; border: 1px solid var(--border); color: var(--muted); padding: 6px 14px; cursor: pointer;
-  }
-  .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .add-btn { border-color: var(--accent); color: var(--accent); }
+  .nav-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 40px; }
+  .filters { display: flex; gap: 10px; }
+  
+  button { font-family: var(--mono); font-size: 10px; padding: 8px 16px; background: none; border: 1px solid var(--border); color: var(--muted); cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+  button:hover, button.active { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.05); }
+  .admin-btn { border-color: var(--accent); color: var(--accent); }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1px; background: var(--border); margin-top: 1px; }
-  .card { background: var(--bg); padding: 32px; cursor: pointer; transition: background 0.2s; position: relative; overflow: hidden; }
-  .card:hover { background: var(--surface); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 30px; transition: 0.3s; }
+  .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,229,255,0.05); }
+  .card-id { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-bottom: 15px; }
   .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-  .tag { font-family: var(--mono); font-size: 9px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.2); color: var(--muted); margin-right: 4px; text-transform: uppercase; }
+  .card-desc { font-family: var(--mono); font-size: 12px; color: var(--muted); line-height: 1.6; }
 
-  /* Modal Styles */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(8,11,16,0.95); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .modal { background: var(--surface); border: 1px solid var(--border); width: 100%; max-width: 600px; padding: 30px; max-height: 90vh; overflow-y: auto; }
-  .field { margin-bottom: 15px; }
-  label { display: block; font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 5px; }
-  input, textarea, select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: white; padding: 10px; font-family: var(--mono); }
+  /* Admin Modal */
+  #admin-controls { display: none; margin-top: 20px; padding: 20px; border: 1px dashed var(--accent); background: rgba(0,229,255,0.02); }
+  input, textarea, select { width: 100%; background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; margin-bottom: 15px; font-family: var(--mono); }
 
-  footer { padding: 40px 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; color: var(--muted); }
+  .footer { margin-top: 80px; font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: center; }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="container">
   <header>
-    <div class="header-label">Terminal Access — Data &amp; ML Intelligence</div>
-    <h1>
-      <input id="site-name" type="text" value="John Hall" spellcheck="false">
-      <input id="site-tagline" type="text" value="Senior Data Analyst | M.S. AI &amp; Machine Learning" spellcheck="false">
-    </h1>
+    <div class="label">System Identity Matrix</div>
+    <h1>John Hall</h1>
+    <div class="tagline">Senior Data Analyst | M.S. AI & Machine Learning [cite: 56, 87]</div>
   </header>
 
-  <div class="controls">
-    <div id="filter-group" class="filter-group"><button class="filter-btn " onclick="setFilter(&#39;all&#39;)">All</button><button class="filter-btn " onclick="setFilter(&#39;data-dev&#39;)">Data &amp; Dev</button><button class="filter-btn " onclick="setFilter(&#39;product&#39;)">Product/UI</button><button class="filter-btn " onclick="setFilter(&#39;ai-media&#39;)">AI/Media</button><button class="filter-btn " onclick="setFilter(&#39;creative&#39;)">Creative</button><button class="filter-btn active" onclick="setFilter(&#39;lifestyle&#39;)">Lifestyle/Sci</button></div>
-    <button class="add-btn" id="open-add">+ Initialize Project</button>
+  <div class="nav-bar">
+    <div class="filters" id="filters">
+      <button class="active" onclick="filter('all')">All_Files</button>
+    </div>
+    <div>
+      <button onclick="toggleAdmin()" class="admin-btn"><i data-lucide="lock" style="width:12px"></i> Admin_Login</button>
+    </div>
+  </div>
+
+  <div id="admin-controls">
+    <div class="label" style="margin-bottom:20px">Database Entry Mode</div>
+    <input type="text" id="p-title" placeholder="Project Title">
+    <select id="p-tag">
+      <option value="data-dev">Data & Dev</option>
+      <option value="ai-media">AI & Media</option>
+      <option value="creative">Creative</option>
+      <option value="lifestyle">Lifestyle</option>
+    </select>
+    <textarea id="p-desc" rows="3" placeholder="Description (You can use icons here like <i data-lucide='cpu'></i>)"></textarea>
+    <button onclick="addProject()" class="admin-btn">Confirm Entry</button>
+    <button onclick="exportSite()">Download Deployment File (index.html)</button>
   </div>
 
   <div class="grid" id="grid"></div>
 
-  <footer>
-    <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" style="width:12px; vertical-align:middle" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg> System Active</span>
-    <span>Click to expand project details</span>
-  </footer>
-</div>
-
-<div class="modal-overlay" id="add-modal" style="display:none">
-  <div class="modal">
-    <h2 style="margin-bottom:20px; font-size:18px">Project Entry</h2>
-    <div class="field">
-      <label>Title</label>
-      <input type="text" id="f-title">
-    </div>
-    <div class="field">
-      <label>Category</label>
-      <select id="f-tag">
-        <option value="data-dev">Data &amp; Dev (Code, Reporting, ERD)</option>
-        <option value="product">Product (Dashboards, Maps)</option>
-        <option value="ai-media">AI &amp; Media (ML, Voice, Video)</option>
-        <option value="creative">Creative (Design, Photo, Gaming)</option>
-        <option value="lifestyle">Lifestyle (Candles, Philosophy)</option>
-      </select>
-    </div>
-    <div class="field">
-      <label>Description</label>
-      <textarea id="f-desc" rows="4"></textarea>
-    </div>
-    <div style="display:flex; gap:10px; margin-top:20px">
-      <button class="add-btn" id="save-project" style="flex:1">Sync to Database</button>
-      <button class="filter-btn" id="close-add">Abort</button>
-    </div>
+  <div class="footer">
+    <i data-lucide="shield-check" style="width:12px; vertical-align:middle"></i> [cite: 56] 10+ Years Intelligence Analytics Active
   </div>
 </div>
 
 <script>
-  // categories based on your list
-  const CATEGORIES = {
-    'data-dev': 'Data & Dev',
-    'product': 'Product/UI',
-    'ai-media': 'AI/Media',
-    'creative': 'Creative',
-    'lifestyle': 'Lifestyle/Sci'
-  };
+  // YOUR DATA LIVES HERE
+  // This is the array we update. 
+  let projects = [
+    { id: "2864", tag: "data-dev", title: "Elevated Candles + Soy Republic", desc: "Founder & Data Lead. Analyzed sales data to forecast demand and designed KPI dashboards to monitor operational performance. [cite: 75, 77]" }
+  ];
 
-  let projects = JSON.parse(localStorage.getItem('john_hall_portfolio') || '[]');
-  let currentFilter = 'all';
+  const CATEGORIES = { 'data-dev': 'Data_Dev', 'ai-media': 'AI_Media', 'creative': 'Creative', 'lifestyle': 'Lifestyle' };
+  let isAdmin = false;
 
-  function render() {
-    const grid = document.getElementById('grid');
-    grid.innerHTML = '';
-
-    const filtered = currentFilter === 'all' ? projects : projects.filter(p => p.tag === currentFilter);
-
-    filtered.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div style="font-family:var(--mono); font-size:10px; color:var(--accent); margin-bottom:10px">ID: ${p.id}</div>
-        <div class="tag">${CATEGORIES[p.tag]}</div>
-        <div class="card-title">${p.title}</div>
-        <div style="color:var(--muted); font-family:var(--mono); font-size:12px">${p.desc}</div>
-      `;
-      grid.appendChild(card);
-    });
-
-    // Update Filter Buttons
-    const fg = document.getElementById('filter-group');
-    fg.innerHTML = `<button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All</button>`;
-    Object.keys(CATEGORIES).forEach(key => {
-      fg.innerHTML += `<button class="filter-btn ${currentFilter === key ? 'active' : ''}" onclick="setFilter('${key}')">${CATEGORIES[key]}</button>`;
-    });
-
-    lucide.createIcons(); // Initialize icons
+  function toggleAdmin() {
+    const pass = prompt("Enter Access Key:");
+    if(pass === "1234") {
+      isAdmin = !isAdmin;
+      document.getElementById('admin-controls').style.display = isAdmin ? 'block' : 'none';
+    } else {
+      alert("Access Denied.");
+    }
   }
 
-  window.setFilter = (f) => { currentFilter = f; render(); };
-
-  document.getElementById('open-add').onclick = () => document.getElementById('add-modal').style.display='flex';
-  document.getElementById('close-add').onclick = () => document.getElementById('add-modal').style.display='none';
-
-  document.getElementById('save-project').onclick = () => {
-    const title = document.getElementById('f-title').value;
-    const tag = document.getElementById('f-tag').value;
-    const desc = document.getElementById('f-desc').value;
-    
-    if(!title) return alert("Title required.");
-
-    projects.push({ id: Date.now().toString().slice(-4), title, tag, desc });
-    localStorage.setItem('john_hall_portfolio', JSON.stringify(projects));
-    document.getElementById('add-modal').style.display='none';
+  function addProject() {
+    const title = document.getElementById('p-title').value;
+    const tag = document.getElementById('p-tag').value;
+    const desc = document.getElementById('p-desc').value;
+    projects.push({ id: Math.floor(Math.random()*9000)+1000, tag, title, desc });
     render();
-  };
+  }
+
+  function render(filterTag = 'all') {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    
+    projects.filter(p => filterTag === 'all' || p.tag === filterTag).forEach(p => {
+      grid.innerHTML += `
+        <div class="card">
+          <div class="card-id">REF_ID: ${p.id}</div>
+          <div class="card-title">${p.title}</div>
+          <div class="card-desc">${p.desc}</div>
+        </div>
+      `;
+    });
+    lucide.createIcons();
+  }
+
+  // THE MAGIC BUTTON: This creates a new HTML file for you to upload to GitHub
+  function exportSite() {
+    let currentHTML = document.documentElement.outerHTML;
+    // We inject the current 'projects' array into the script section of the new file
+    const dataInject = `let projects = ${JSON.stringify(projects)};`;
+    const finalHTML = currentHTML.replace(/let projects = \[.*?\];/s, dataInject);
+    
+    const blob = new Blob([finalHTML], {type: 'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    a.click();
+  }
 
   render();
 </script>
-
-</body></html>
+</body>
+</html>
