@@ -3,146 +3,112 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Portfolio — John Hall</title>
+<title>John Hall — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
   :root {
-    --bg: #05070a;
-    --surface: #0a0f16;
-    --border: rgba(0, 229, 255, 0.1);
-    --accent: #00e5ff;
-    --text: #e8edf5;
-    --muted: #5a6478;
-    --mono: 'DM Mono', monospace;
-    --display: 'Syne', sans-serif;
+    --bg: #05070a; --surface: #0a0f16; --border: rgba(0, 229, 255, 0.1);
+    --accent: #00e5ff; --text: #e8edf5; --muted: #5a6478;
+    --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif;
   }
-
-  body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; min-height: 100vh; overflow-x: hidden; }
+  body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; padding: 40px 20px; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
   
-  /* Sci-Fi Grid & Noise */
-  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"); pointer-events: none; z-index: 10; }
-  body::after { content: ''; position: fixed; inset: 0; background: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
+  /* Background Sci-Fi Grid */
+  body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 50px 50px; z-index: 0; }
 
-  .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
-  
-  header { border-left: 3px solid var(--accent); padding-left: 24px; margin-bottom: 60px; }
-  .label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-  h1 { font-size: 64px; margin: 0; font-weight: 800; line-height: 1; }
-  .tagline { color: var(--muted); font-size: 24px; margin-top: 10px; }
+  header { border-left: 3px solid var(--accent); padding-left: 20px; margin-bottom: 60px; }
+  h1 { font-size: 64px; margin: 0; letter-spacing: -2px; }
+  .tagline { font-family: var(--mono); color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
 
-  .nav-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 40px; }
-  .filters { display: flex; gap: 10px; }
-  
-  button { font-family: var(--mono); font-size: 10px; padding: 8px 16px; background: none; border: 1px solid var(--border); color: var(--muted); cursor: pointer; text-transform: uppercase; transition: 0.2s; }
-  button:hover, button.active { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.05); }
-  .admin-btn { border-color: var(--accent); color: var(--accent); }
+  h2 { font-size: 12px; font-family: var(--mono); text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 40px; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-  .card { background: var(--surface); border: 1px solid var(--border); padding: 30px; transition: 0.3s; }
-  .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,229,255,0.05); }
-  .card-id { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-bottom: 15px; }
-  .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-  .card-desc { font-family: var(--mono); font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; margin-bottom: 15px; position: relative; }
+  .card-title { font-size: 20px; font-weight: 800; margin-bottom: 5px; }
+  .card-meta { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 15px; }
+  .card-desc { font-family: var(--mono); font-size: 13px; color: #a1aab8; }
 
-  /* Admin Modal */
-  #admin-controls { display: none; margin-top: 20px; padding: 20px; border: 1px dashed var(--accent); background: rgba(0,229,255,0.02); }
-  input, textarea, select { width: 100%; background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; margin-bottom: 15px; font-family: var(--mono); }
-
-  .footer { margin-top: 80px; font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: center; }
+  /* Admin Interface */
+  #admin-panel { display: none; background: #000; border: 1px dashed var(--accent); padding: 20px; margin-bottom: 40px; }
+  input, textarea { width: 100%; background: #111; border: 1px solid var(--border); color: #fff; padding: 10px; margin-bottom: 10px; font-family: var(--mono); }
+  button { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; cursor: pointer; font-family: var(--mono); font-size: 11px; text-transform: uppercase; }
+  button:hover { background: var(--accent); color: #000; }
+  .login-btn { position: absolute; top: 0; right: 0; border: none; opacity: 0.3; }
 </style>
 </head>
 <body>
 
 <div class="container">
+  <button class="login-btn" onclick="toggleAdmin()">Admin_Login</button>
+
   <header>
-    <div class="label">System Identity Matrix</div>
     <h1>John Hall</h1>
-    <div class="tagline">Senior Data Analyst | M.S. AI & Machine Learning [cite: 56, 87]</div>
+    <div class="tagline">Senior Data Analyst | M.S. AI & Machine Learning</div>
   </header>
 
-  <div class="nav-bar">
-    <div class="filters" id="filters">
-      <button class="active" onclick="filter('all')">All_Files</button>
+  <div id="admin-panel">
+    <input type="text" id="new-title" placeholder="Project Title">
+    <input type="text" id="new-meta" placeholder="Category (e.g. PYTHON / MACHINE LEARNING)">
+    <textarea id="new-desc" rows="3" placeholder="Description... (Use <i data-lucide='cpu'></i> for icons)"></textarea>
+    <button onclick="addProject()">Add Project</button>
+    <button onclick="exportHTML()">Download Updated index.html</button>
+  </div>
+
+  <h2>Experience_Matrix</h2>
+  <div class="card">
+    <div class="card-title">Elevated Candles + Soy Republic</div>
+    <div class="card-meta">Founder / Data & Analytics Lead | 2016 — 2021</div>
+    <div class="card-desc">
+      Analyzed sales and customer data to forecast demand and guide pricing[cite: 76]. 
+      Designed KPI dashboards and reporting workflows to monitor operational performance[cite: 77].
     </div>
-    <div>
-      <button onclick="toggleAdmin()" class="admin-btn"><i data-lucide="lock" style="width:12px"></i> Admin_Login</button>
+  </div>
+
+  <h2>Project_Database</h2>
+  <div id="project-list">
     </div>
-  </div>
-
-  <div id="admin-controls">
-    <div class="label" style="margin-bottom:20px">Database Entry Mode</div>
-    <input type="text" id="p-title" placeholder="Project Title">
-    <select id="p-tag">
-      <option value="data-dev">Data & Dev</option>
-      <option value="ai-media">AI & Media</option>
-      <option value="creative">Creative</option>
-      <option value="lifestyle">Lifestyle</option>
-    </select>
-    <textarea id="p-desc" rows="3" placeholder="Description (You can use icons here like <i data-lucide='cpu'></i>)"></textarea>
-    <button onclick="addProject()" class="admin-btn">Confirm Entry</button>
-    <button onclick="exportSite()">Download Deployment File (index.html)</button>
-  </div>
-
-  <div class="grid" id="grid"></div>
-
-  <div class="footer">
-    <i data-lucide="shield-check" style="width:12px; vertical-align:middle"></i> [cite: 56] 10+ Years Intelligence Analytics Active
-  </div>
 </div>
 
 <script>
-  // YOUR DATA LIVES HERE
-  // This is the array we update. 
+  // YOUR PROJECT DATA LIVES HERE
   let projects = [
-    { id: "2864", tag: "data-dev", title: "Elevated Candles + Soy Republic", desc: "Founder & Data Lead. Analyzed sales data to forecast demand and designed KPI dashboards to monitor operational performance. [cite: 75, 77]" }
+    { title: "Predictive Trend Analysis", meta: "PYTHON / KPI FORECASTING", desc: "Built forecasting models to analyze historical KPI trends and support planning decisions[cite: 97, 98]." }
   ];
 
-  const CATEGORIES = { 'data-dev': 'Data_Dev', 'ai-media': 'AI_Media', 'creative': 'Creative', 'lifestyle': 'Lifestyle' };
-  let isAdmin = false;
+  function render() {
+    const list = document.getElementById('project-list');
+    list.innerHTML = projects.map(p => `
+      <div class="card">
+        <div class="card-title">${p.title}</div>
+        <div class="card-meta">${p.meta}</div>
+        <div class="card-desc">${p.desc}</div>
+      </div>
+    `).join('');
+    lucide.createIcons();
+  }
 
   function toggleAdmin() {
-    const pass = prompt("Enter Access Key:");
-    if(pass === "1234") {
-      isAdmin = !isAdmin;
-      document.getElementById('admin-controls').style.display = isAdmin ? 'block' : 'none';
-    } else {
-      alert("Access Denied.");
+    if (prompt("Access Key:") === "1234") {
+      document.getElementById('admin-panel').style.display = 'block';
     }
   }
 
   function addProject() {
-    const title = document.getElementById('p-title').value;
-    const tag = document.getElementById('p-tag').value;
-    const desc = document.getElementById('p-desc').value;
-    projects.push({ id: Math.floor(Math.random()*9000)+1000, tag, title, desc });
+    const title = document.getElementById('new-title').value;
+    const meta = document.getElementById('new-meta').value;
+    const desc = document.getElementById('new-desc').value;
+    projects.push({ title, meta, desc });
     render();
   }
 
-  function render(filterTag = 'all') {
-    const grid = document.getElementById('grid');
-    grid.innerHTML = '';
-    
-    projects.filter(p => filterTag === 'all' || p.tag === filterTag).forEach(p => {
-      grid.innerHTML += `
-        <div class="card">
-          <div class="card-id">REF_ID: ${p.id}</div>
-          <div class="card-title">${p.title}</div>
-          <div class="card-desc">${p.desc}</div>
-        </div>
-      `;
-    });
-    lucide.createIcons();
-  }
-
-  // THE MAGIC BUTTON: This creates a new HTML file for you to upload to GitHub
-  function exportSite() {
-    let currentHTML = document.documentElement.outerHTML;
-    // We inject the current 'projects' array into the script section of the new file
-    const dataInject = `let projects = ${JSON.stringify(projects)};`;
-    const finalHTML = currentHTML.replace(/let projects = \[.*?\];/s, dataInject);
+  // THIS CREATES THE NEW FILE FOR GITHUB
+  function exportHTML() {
+    const currentHTML = document.documentElement.outerHTML;
+    const dataString = `let projects = ${JSON.stringify(projects)};`;
+    const finalHTML = "<!DOCTYPE html>\n" + currentHTML.replace(/let projects = \[.*?\];/s, dataString);
     
     const blob = new Blob([finalHTML], {type: 'text/html'});
     const a = document.createElement('a');
