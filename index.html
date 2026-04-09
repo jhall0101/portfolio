@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"><plasmo-csui id="jobright-helper-plugin"></plasmo-csui><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JH_TERMINAL_V8.1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script><style type="text/css" id="operaUserStyle"></style>
+    <title>JH_TERMINAL_V8.2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --bg: #030508; --surface: #0a0f16; --border: #1a2633;
@@ -12,7 +13,7 @@
             --text: #e8edf5; --muted: #5a6478; --danger: #ff4b4b;
             --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif;
         }
-        body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; padding: 20px; line-height: 1.5; }
+        body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; padding: 20px; line-height: 1.5; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
         
         body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; opacity: 0.15; }
@@ -21,20 +22,23 @@
         h1 { font-size: clamp(40px, 8vw, 72px); margin: 0; letter-spacing: -3px; text-transform: uppercase; }
         .tagline { font-family: var(--mono); color: var(--accent); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; }
 
+        /* Navigation & Category Glow Restored */
         .nav-zone { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 25px; gap: 20px; }
         .filter-list { display: flex; gap: 12px; flex-wrap: wrap; }
-        .filter-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 10px 18px; font-family: var(--mono); font-size: 10px; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .filter-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 10px 18px; font-family: var(--mono); font-size: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.3s ease; }
+        
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px var(--accent-dim); }
         .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); box-shadow: 0 0 20px var(--accent), inset 0 0 10px var(--accent-dim); text-shadow: 0 0 8px var(--accent); }
 
         .admin-bar { background: var(--surface); border: 1px solid var(--accent); padding: 25px; margin-bottom: 40px; display: none; box-shadow: 0 0 20px var(--accent-dim); }
         input, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; font-family: var(--mono); font-size: 13px; width: 100%; margin-bottom: 15px; box-sizing: border-box; }
         
         .btn { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; cursor: pointer; font-family: var(--mono); text-transform: uppercase; font-size: 10px; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
-        .btn:hover { background: var(--accent-dim); box-shadow: 0 0 10px var(--accent-dim); }
+        .btn:hover { background: var(--accent-dim); box-shadow: 0 0 15px var(--accent); }
         .btn-danger { border-color: var(--danger); color: var(--danger); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; }
-        .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; transition: 0.4s; position: relative; display: flex; flex-direction: column; }
+        .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; transition: 0.4s; display: flex; flex-direction: column; }
         .card:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-dim); transform: translateY(-5px); }
 
         .card-img { 
@@ -44,102 +48,72 @@
         }
         .card:hover .card-img { filter: none; }
         .card-title { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
-        .card-desc { font-family: var(--mono); font-size: 13px; color: #a1aab8; margin-bottom: 20px; flex-grow: 1; }
 
-        /* Modal Layout */
-        #detail-modal { position: fixed; inset: 0; background: rgba(3,5,8,0.98); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
-        .modal-content { background: var(--surface); border: 1px solid var(--accent); max-width: 900px; width: 100%; padding: 40px; position: relative; margin: auto; }
-        .modal-gallery { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 25px 0; }
-        .modal-gallery img { width: 100%; border: 1px solid var(--border); }
+        /* Modal Layout Improvements */
+        #detail-modal { position: fixed; inset: 0; background: rgba(3,5,8,0.98); z-index: 100; display: none; align-items: flex-start; justify-content: center; padding: 40px 20px; backdrop-filter: blur(15px); overflow-y: auto; }
+        .modal-content { background: var(--surface); border: 1px solid var(--accent); max-width: 900px; width: 100%; padding: 40px; position: relative; box-shadow: 0 0 50px rgba(0,229,255,0.1); }
+        
+        .modal-gallery { display: flex; flex-direction: column; gap: 20px; margin: 25px 0; }
+        .modal-gallery img { width: 100%; max-height: 500px; object-fit: contain; border: 1px solid var(--border); background: #000; }
+        
         .modal-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 25px; }
         
         .admin-actions { display: none; gap: 10px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; }
         .edit-mode .admin-actions { display: flex; }
         .login-trigger { position: fixed; bottom: 20px; right: 20px; opacity: 0.05; cursor: pointer; font-size: 10px; }
     </style>
-<style type="text/css"></style></head>
-<body data-new-gr-c-s-check-loaded="14.1280.0" data-gr-ext-installed=""  data-new-gr-c-s-loaded="14.1280.0">
+</head>
+<body>
 
-<div id="detail-modal" onclick="closeModal()" style="display: none;">
+<div id="detail-modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <div class="tagline" id="modal-cat">DATA_ENTRY // CAREER</div>
-        <h2 id="modal-title" style="font-size: 42px; margin: 10px 0; text-transform: uppercase;">Elevated Candles &lt;i data-lucide="flame"&gt;&lt;/i&gt;</h2>
-        <div class="modal-gallery" id="modal-gallery"><img src="fall fantasy.png"></div>
-        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px;"><b>Technical Breakdown:</b>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg> SQL Server optimization
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bar-chart-3" aria-hidden="true" class="lucide lucide-bar-chart-3"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg> Tableau Dashboard design
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trending-up" aria-hidden="true" class="lucide lucide-trending-up"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg> 40% growth in efficiency.</div>
-        <div class="modal-links" id="modal-links"><a href="https" target="_blank" class="btn">Instagram</a><a href="https" target="_blank" class="btn">YouTube</a></div>
+        <div class="tagline" id="modal-cat"></div>
+        <h2 id="modal-title" style="font-size: clamp(24px, 5vw, 42px); margin: 10px 0; text-transform: uppercase;"></h2>
+        <div class="modal-gallery" id="modal-gallery"></div>
+        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px; line-height: 1.8;"></div>
+        <div class="modal-links" id="modal-links"></div>
         <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="closeModal()">Close_Terminal</button>
     </div>
 </div>
 
 <div class="container">
     <header>
-        <div class="tagline">DATA_ARCHIVE_v8.1 // JH0101</div>
+        <div class="tagline">ARCHIVE_SYSTEM_v8.2 // JH0101</div>
         <h1>John Hall</h1>
         <p style="font-family: var(--mono); color: var(--muted);">SR_ANALYST // AI_ML_ARCHITECTURE</p>
     </header>
 
     <div class="nav-zone">
-        <div class="filter-list" id="filter-bar">
-            <button class="filter-btn active" onclick="setFilter('ALL')">ALL</button>
-        
-            <button class="filter-btn " onclick="setFilter('CAREER')">CAREER</button>
-        
-            <button class="filter-btn " onclick="setFilter('CREATIVE')">CREATIVE</button>
-        </div>
+        <div class="filter-list" id="filter-bar"></div>
         <button class="btn" onclick="unlockAdmin()" id="lock-btn" style="opacity:0.3; border-color:var(--muted); color:var(--muted)">Admin_Access</button>
     </div>
 
-    <div id="admin-panel" class="admin-bar" style="display: none;">
+    <div id="admin-panel" class="admin-bar">
         <div class="input-group" style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
             <input type="text" id="p-title" placeholder="PROJECT_NAME">
             <input type="text" id="p-category" placeholder="DOMAIN (e.g. VISUALS)">
         </div>
-        <input type="text" id="p-img" placeholder="IMAGES (comma separated: img1.png, img2.png)">
-        <input type="text" id="p-links" placeholder="LINKS (Format: Label: URL, Label: URL)">
-        <textarea id="p-desc" rows="2" placeholder="CARD_SUMMARY"></textarea>
-        <textarea id="p-detail" rows="6" placeholder="FULL_LOG_DETAIL (Rendered as HTML)"></textarea>
+        <input type="text" id="p-img" placeholder="IMAGES (comma separated URLs or filenames)">
+        <input type="text" id="p-links" placeholder="LINKS (Label: URL, Label: URL)">
+        <textarea id="p-desc" rows="2" placeholder="SHORT_CARD_SUMMARY"></textarea>
+        <textarea id="p-detail" rows="6" placeholder="FULL_LOG_DETAIL (Supports HTML)"></textarea>
         
         <div style="display:flex; gap:10px;">
-            <button class="btn" onclick="saveProject()" id="main-save-btn">Update_Entry</button>
+            <button class="btn" onclick="saveProject()" id="main-save-btn">Sync_To_Mainframe</button>
             <button class="btn" onclick="exportFinalHTML()">Download HTML</button>
-            <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display: block;">Abort</button>
+            <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display:none">Abort</button>
         </div>
     </div>
 
-    <div class="grid" id="project-grid">
-            <div class="card">
-                <img src="fall fantasy.png" class="card-img">
-                <div class="card-tag">// CAREER</div>
-                <div class="card-title">Elevated Candles <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="flame" aria-hidden="true" class="lucide lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div>
-                <div class="card-desc">Founder &amp; Data Lead. Developed forecasting models and KPI dashboards.</div>
-                <button class="btn" onclick="openModal(1)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" aria-hidden="true" size="14" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
-                <div class="admin-actions">
-                    <button class="btn" onclick="startEdit(1)">Edit</button>
-                    <button class="btn btn-danger" onclick="deleteProject(1)">Delete</button>
-                </div>
-            </div>
-        
-            <div class="card">
-                <img src="y_files - logo.png" class="card-img">
-                <div class="card-tag">// CREATIVE</div>
-                <div class="card-title">THE Y FILES <i data-lucide="SEARCH"></i></div>
-                <div class="card-desc">TEST</div>
-                <button class="btn" onclick="openModal(1775654838301)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" aria-hidden="true" size="14" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
-                <div class="admin-actions">
-                    <button class="btn" onclick="startEdit(1775654838301)">Edit</button>
-                    <button class="btn btn-danger" onclick="deleteProject(1775654838301)">Delete</button>
-                </div>
-            </div>
-        </div>
+    <div class="grid" id="project-grid"></div>
 </div>
 
 <div class="login-trigger" onclick="unlockAdmin()">[ENCRYPTED_LINK]</div>
 
 <script>
-    let projects = [{"id":1,"title":"Elevated Candles <i data-lucide=\"flame\"></i>","category":"CAREER","desc":"Founder & Data Lead. Developed forecasting models and KPI dashboards.","detail":"<b>Technical Breakdown:</b>\n<i data-lucide='cpu'></i> SQL Server optimization\n<i data-lucide='bar-chart-3'></i> Tableau Dashboard design\n<i data-lucide='trending-up'></i> 40% growth in efficiency.","img":"fall fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/, YouTube: https://www.youtube.com/@Elevatedcandles/videos"},{"id":1775654838301,"title":"THE Y FILES <i data-lucide=\"SEARCH\"></i>","category":"CREATIVE","desc":"TEST","detail":"TEST","img":"y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/ ,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"}];
+    let projects = [
+        { id: 1, title: "<i data-lucide='flame'></i> Elevated Candles", category: "CAREER", desc: "Founder & Data Lead. Developed forecasting models and KPI dashboards.", detail: "<b>Technical Breakdown:</b>\n<i data-lucide='cpu'></i> SQL Server optimization\n<i data-lucide='bar-chart-3'></i> Tableau Dashboard design\n<i data-lucide='trending-up'></i> 40% growth in efficiency.", img: "", links: "Visit Store: https://example.com" }
+    ];
     
     let editingId = null;
     let currentFilter = 'ALL';
@@ -162,7 +136,7 @@
                 <div class="card-tag">// ${p.category}</div>
                 <div class="card-title">${p.title}</div>
                 <div class="card-desc">${p.desc}</div>
-                <button class="btn" onclick="openModal(${p.id})">Open_Log <i data-lucide="external-link" size="14"></i></button>
+                <button class="btn" onclick="openModal(${p.id})">Open_Log <i data-lucide="chevron-right" size="14"></i></button>
                 <div class="admin-actions">
                     <button class="btn" onclick="startEdit(${p.id})">Edit</button>
                     <button class="btn btn-danger" onclick="deleteProject(${p.id})">Delete</button>
@@ -174,31 +148,35 @@
 
     function openModal(id) {
         const p = projects.find(x => x.id === id);
-        document.getElementById('modal-title').innerText = p.title;
+        
+        // Final Fix: Inject innerHTML then trigger icons
+        document.getElementById('modal-title').innerHTML = p.title;
         document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
+        document.getElementById('modal-body').innerHTML = p.detail || p.desc;
         
-        // Render Detail (allowing icons)
-        const body = document.getElementById('modal-body');
-        body.innerHTML = p.detail || p.desc;
-        
-        // Render Multi-Images
         const gallery = document.getElementById('modal-gallery');
         gallery.innerHTML = p.img ? p.img.split(',').map(src => `<img src="${src.trim()}">`).join('') : '';
         
-        // Render Multi-Links
         const linksContainer = document.getElementById('modal-links');
         if (p.links) {
             linksContainer.innerHTML = p.links.split(',').map(l => {
-                const [label, url] = l.split(':').map(s => s.trim());
+                const parts = l.split(':');
+                const label = parts.shift().trim();
+                const url = parts.join(':').trim();
                 return `<a href="${url}" target="_blank" class="btn">${label}</a>`;
             }).join('');
         } else { linksContainer.innerHTML = ''; }
 
         document.getElementById('detail-modal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Stop background scroll
         lucide.createIcons();
     }
 
-    function closeModal() { document.getElementById('detail-modal').style.display = 'none'; }
+    function closeModal() { 
+        document.getElementById('detail-modal').style.display = 'none'; 
+        document.body.style.overflow = 'auto';
+    }
+
     function setFilter(cat) { currentFilter = cat; render(); }
 
     function unlockAdmin() {
@@ -259,6 +237,5 @@
     }
     render();
 </script>
-
-
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+</body>
+</html>
