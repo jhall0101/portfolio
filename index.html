@@ -175,8 +175,8 @@
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">${p.desc}</p>
                 <button class="btn" style="margin-top:15px;" onclick="openModal(${p.id})">Open_Log <i data-lucide="chevron-right"></i></button>
                 <div class="admin-actions">
-                    <button class="btn btn-danger" onclick="deleteProject(${p.id})">Del</button>
-                    <button class="btn" onclick="startEdit(${p.id})">Edit</button>
+					<button class="btn" onclick="startEdit(${p.id})">Edit</button>
+					<button class="btn btn-danger" onclick="deleteProject(${p.id})">Del</button>
                 </div>
             </div>
         `).join('');
