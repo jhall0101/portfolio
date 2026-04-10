@@ -46,14 +46,14 @@
         .btn:hover { background: var(--accent-dim); box-shadow: 0 0 15px var(--accent); }
         .btn-danger { border-color: var(--danger); color: var(--danger); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; position: relative; z-index: 2; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; position: relative; z-index: 2; }
         .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; transition: 0.4s; display: flex; flex-direction: column; }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .card-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; margin-bottom: 20px; border: 1px solid var(--border); filter: grayscale(1); transition: 0.3s; }
         .card:hover .card-img { filter: none; }
 
         /* V17.1 Style Restore: Small, Bold, Syne Titles */
-        .card-title { font-family: var(--display); font-size: 13px; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; color: var(--accent); }
+        .card-title { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; color: var(--text); }
 
         #detail-modal { position: fixed; inset: 0; background: rgba(3,5,8,0.98); z-index: 100; display: none; align-items: flex-start; justify-content: center; padding: 40px 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .modal-content { background: var(--surface); border: 1px solid var(--accent); max-width: 900px; width: 100%; padding: 40px; position: relative; }
