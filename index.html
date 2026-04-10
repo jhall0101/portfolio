@@ -2,7 +2,7 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JH_TERMINAL_V17.6</title>
+    <title>JH_TERMINAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -20,7 +20,7 @@
         body::before { 
             content: ''; position: fixed; inset: 0; 
             background: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); 
-            background-size: clamp(30px, 10vw, 60px) clamp(30px, 10vw, 60px); 
+            background-size: 40px 40px; 
             pointer-events: none; opacity: 0.15; z-index: 0;
         }
 
@@ -29,33 +29,25 @@
         .tagline { font-family: var(--mono); color: var(--accent); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; }
 
         .nav-zone { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 25px; position: relative; z-index: 2; }
-        .filter-list { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px; }
-        .sub-nav { display: flex; gap: 10px; flex-wrap: wrap; padding: 10px 20px; background: rgba(0,229,255,0.03); border-left: 2px solid var(--accent); margin-top: 10px; display: none; }
-        
+        .filter-list { display: flex; gap: 12px; flex-wrap: wrap; }
         .filter-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 8px 16px; font-family: var(--mono); font-size: 10px; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
-        .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); box-shadow: 0 0 15px var(--accent-dim); }
-        
-        .sub-btn { font-family: var(--mono); font-size: 9px; color: var(--muted); background: none; border: none; cursor: pointer; text-transform: uppercase; padding: 4px 8px; }
-        .sub-btn.active { color: var(--bg); background: var(--accent); font-weight: bold; }
+        .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
 
-        .admin-bar { background: var(--surface); border: 1px solid var(--accent); padding: 25px; margin-bottom: 40px; display: none; box-shadow: 0 0 20px var(--accent-dim); position: relative; z-index: 5; }
-        .admin-section { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .admin-bar { background: var(--surface); border: 1px solid var(--accent); padding: 25px; margin-bottom: 40px; display: none; position: relative; z-index: 5; }
         input, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; font-family: var(--mono); font-size: 13px; width: 100%; margin-bottom: 15px; box-sizing: border-box; }
         
         .btn { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; cursor: pointer; font-family: var(--mono); text-transform: uppercase; font-size: 10px; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
-        .btn:hover { background: var(--accent-dim); box-shadow: 0 0 15px var(--accent); }
-        .btn-danger { border-color: var(--danger); color: var(--danger); }
+        .btn:hover { background: var(--accent-dim); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; position: relative; z-index: 2; }
         .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; transition: 0.4s; display: flex; flex-direction: column; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .card:hover { border-color: var(--accent); }
         
-        /* Restored V17.1 Grayscale Hover */
         .card-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; margin-bottom: 20px; border: 1px solid var(--border); filter: grayscale(1); transition: 0.3s; }
         .card:hover .card-img { filter: none; }
 
-        /* Restored V17.1 Project Title Specs */
-        .card-title { font-family: var(--display); font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; text-transform: uppercase; }
+        /* Specific fix: Smaller, punchy titles */
+        .card-title { font-family: var(--display); font-size: 18px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; text-transform: uppercase; line-height: 1.1; }
 
         #detail-modal { position: fixed; inset: 0; background: rgba(3,5,8,0.98); z-index: 100; display: none; align-items: flex-start; justify-content: center; padding: 40px 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .modal-content { background: var(--surface); border: 1px solid var(--accent); max-width: 900px; width: 100%; padding: 40px; position: relative; }
@@ -68,51 +60,37 @@
 <div id="detail-modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="tagline" id="modal-cat"></div>
-        <h2 id="modal-title" style="margin: 10px 0; text-transform: uppercase; font-size: clamp(24px, 5vw, 42px);"></h2>
+        <h2 id="modal-title" style="margin: 10px 0; text-transform: uppercase; font-size: 32px;"></h2>
         <div id="modal-gallery" style="display:flex; flex-direction:column; gap:20px; margin:20px 0;"></div>
-        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px; line-height: 1.8;"></div>
-        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;"></div>
-        <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="closeModal()">Close_Terminal</button>
+        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px;"></div>
+        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px;"></div>
+        <button class="btn" style="margin-top:40px;" onclick="closeModal()">Close_Terminal</button>
     </div>
 </div>
 
 <div class="container">
     <header>
-        <div class="tagline">ARCHIVE_SYSTEM_v17.1 // CORE_RESTORE</div>
+        <div class="tagline">ARCHIVE_SYSTEM // TERMINAL_INTERFACE</div>
         <h1>John Hall</h1>
         <p style="font-family: var(--mono); color: var(--muted);">SR_ANALYST // AI_ML_ARCHITECTURE</p>
     </header>
 
     <div class="nav-zone">
         <div class="filter-list" id="filter-bar"></div>
-        <div class="sub-nav" id="sub-filter-bar"></div>
     </div>
 
     <div id="admin-panel" class="admin-bar">
-        <div class="admin-section">
-            <div class="tagline" style="margin-bottom:10px;">Structure_Manager</div>
-            <div id="cat-chips" style="margin-bottom:15px; display:flex; flex-wrap:wrap; gap:5px;"></div>
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="new-cat" placeholder="E.G. CAREER:ANALYTICS" style="margin:0;">
-                <button class="btn" onclick="addStructure()">Add_Node</button>
-            </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
+            <input type="text" id="p-title" placeholder="PROJECT_NAME">
+            <input type="text" id="p-category" placeholder="DOMAIN (E.G. CAREER:OPERATIONS)">
         </div>
-        <div class="admin-section">
-            <div class="tagline" style="margin-bottom:10px;">Entry_Editor</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-                <input type="text" id="p-title" placeholder="PROJECT_NAME">
-                <input type="text" id="p-category" placeholder="DOMAIN (PARENT:CHILD)">
-            </div>
-            <input type="text" id="p-img" placeholder="IMAGE_URLS (Comma separated)">
-            <input type="text" id="p-links" placeholder="LABEL:URL, LABEL:URL">
-            <textarea id="p-desc" rows="2" placeholder="SHORT_SUMMARY"></textarea>
-            <textarea id="p-detail" rows="4" placeholder="FULL_LOG (HTML OK)"></textarea>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button class="btn" onclick="saveProject()" id="save-btn">Sync_Entry</button>
-                <button class="btn" onclick="exportFinalHTML()">Download_V17.6</button>
-                <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display:none">Abort</button>
-                <button class="btn btn-danger" onclick="lockAdmin()" style="margin-left:auto;">Lock_Terminal</button>
-            </div>
+        <input type="text" id="p-img" placeholder="IMAGE_URLS">
+        <textarea id="p-desc" rows="2" placeholder="SHORT_SUMMARY"></textarea>
+        <textarea id="p-detail" rows="4" placeholder="FULL_LOG"></textarea>
+        <div style="display:flex; gap:10px;">
+            <button class="btn" onclick="saveProject()" id="save-btn">Sync_Entry</button>
+            <button class="btn" onclick="exportFinalHTML()">Download_Final</button>
+            <button class="btn btn-danger" onclick="lockAdmin()" style="margin-left:auto;">Lock_Terminal</button>
         </div>
     </div>
 
@@ -123,32 +101,17 @@
 
 <script>
     let projects = [
-        {"id":1,"title":"ELEVATED CANDLES","category":"CAREER:OPERATIONS","desc":"Founder & Data Lead.","detail":"<b>Technical Breakdown:</b>\nSQL Server optimization and KPI dashboards.","img":"fall fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/"},
-        {"id":2,"title":"THE Y FILES","category":"CREATIVE:DOCUMENTARY","desc":"A documentary exploration of data and storytelling.","detail":"Log entries covering various episodes and data narratives.","img":"y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/"}
+        {"id":1,"title":"ELEVATED CANDLES","category":"CAREER:OPERATIONS","desc":"Founder & Data Lead.","detail":"Technical Breakdown:\nSQL Server optimization and KPI dashboards.","img":"fall fantasy.png","links":""},
+        {"id":2,"title":"THE Y FILES","category":"CREATIVE:DOCUMENTARY","desc":"A documentary exploration of data and storytelling.","detail":"Log entries covering various episodes.","img":"y_files - logo.png","links":""}
     ];
-    let structure = ["CAREER:ANALYTICS", "CAREER:CODE", "CREATIVE:VIDEO", "RESEARCH"];
     
-    let currentParent = 'ALL'; let currentChild = 'ALL'; let editingId = null;
+    let currentParent = 'ALL';
 
     function render() {
-        const parents = ['ALL', ...new Set([...structure.map(s => s.split(':')[0]), ...projects.map(p => p.category.split(':')[0])])].filter(Boolean);
+        const parents = ['ALL', ...new Set(projects.map(p => p.category.split(':')[0]))];
         document.getElementById('filter-bar').innerHTML = parents.map(p => `<button class="filter-btn ${currentParent === p ? 'active' : ''}" onclick="setParent('${p}')">${p}</button>`).join('');
 
-        const subNav = document.getElementById('sub-filter-bar');
-        if (currentParent !== 'ALL') {
-            const children = ['ALL', ...new Set([...structure.filter(s => s.startsWith(currentParent + ':')).map(s => s.split(':')[1]), ...projects.filter(p => p.category.startsWith(currentParent + ':')).map(p => p.category.split(':')[1])].filter(Boolean))];
-            if (children.length > 1) {
-                subNav.style.display = 'flex';
-                subNav.innerHTML = children.map(c => `<button class="sub-btn ${currentChild === c ? 'active' : ''}" onclick="setChild('${c}')">[ ${c} ]</button>`).join('');
-            } else { subNav.style.display = 'none'; }
-        } else { subNav.style.display = 'none'; }
-
-        document.getElementById('cat-chips').innerHTML = structure.map(s => `<span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">${s} <button onclick="removeStructure('${s}')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span>`).join('');
-
-        const filtered = projects.filter(p => {
-            const [pCat, pSub] = p.category.split(':');
-            return (currentParent === 'ALL' || pCat === currentParent) && (currentChild === 'ALL' || pSub === currentChild);
-        });
+        const filtered = projects.filter(p => currentParent === 'ALL' || p.category.startsWith(currentParent));
 
         document.getElementById('project-grid').innerHTML = filtered.map(p => `
             <div class="card">
@@ -166,54 +129,34 @@
         lucide.createIcons();
     }
 
-    function setParent(p) { currentParent = p; currentChild = 'ALL'; render(); }
-    function setChild(c) { currentChild = c; render(); }
-    function addStructure() { const val = document.getElementById('new-cat').value.toUpperCase().trim(); if(val && !structure.includes(val)) { structure.push(val); document.getElementById('new-cat').value=''; render(); } }
-    function removeStructure(s) { if(confirm("Remove Node?")) { structure = structure.filter(i => i !== s); render(); } }
+    function setParent(p) { currentParent = p; render(); }
 
     function openModal(id) {
         const p = projects.find(x => x.id === id);
         document.getElementById('modal-title').innerText = p.title;
         document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
-        document.getElementById('modal-body').innerHTML = p.detail || p.desc;
+        document.getElementById('modal-body').innerText = p.detail || p.desc;
         document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src => `<img src="${src.trim()}" style="width:100%; border:1px solid var(--border);">`).join('') : '';
-        document.getElementById('modal-links').innerHTML = p.links ? p.links.split(',').map(l => {
-            const parts = l.split(':'); const label = parts.shift().trim(); const url = parts.join(':').trim();
-            return `<a href="${url}" target="_blank" class="btn">${label}</a>`;
-        }).join('') : '';
         document.getElementById('detail-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        lucide.createIcons();
     }
 
     function closeModal() { document.getElementById('detail-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
     function saveProject() {
-        const p = { id: editingId || Date.now(), title: document.getElementById('p-title').value, category: document.getElementById('p-category').value.toUpperCase().trim(), desc: document.getElementById('p-desc').value, detail: document.getElementById('p-detail').value, img: document.getElementById('p-img').value, links: document.getElementById('p-links').value };
-        if(editingId) projects = projects.map(x => x.id === editingId ? p : x); else projects.push(p);
-        cancelEdit(); render();
+        const p = { id: Date.now(), title: document.getElementById('p-title').value, category: document.getElementById('p-category').value.toUpperCase(), desc: document.getElementById('p-desc').value, detail: document.getElementById('p-detail').value, img: document.getElementById('p-img').value };
+        projects.push(p); render();
     }
 
-    function startEdit(id) {
-        editingId = id; const p = projects.find(x => x.id === id);
-        document.getElementById('p-title').value = p.title; document.getElementById('p-category').value = p.category;
-        document.getElementById('p-desc').value = p.desc; document.getElementById('p-detail').value = p.detail || '';
-        document.getElementById('p-img').value = p.img || ''; document.getElementById('p-links').value = p.links || '';
-        document.getElementById('save-btn').innerText = "Update_Entry"; document.getElementById('cancel-btn').style.display = "inline-flex";
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-
-    function cancelEdit() { editingId = null; ['p-title','p-category','p-desc','p-detail','p-img','p-links'].forEach(id => document.getElementById(id).value = ''); document.getElementById('save-btn').innerText = "Sync_Entry"; document.getElementById('cancel-btn').style.display = "none"; }
-    function deleteProject(id) { if(confirm("WIPE ENTRY?")) { projects = projects.filter(p => p.id !== id); render(); } }
+    function deleteProject(id) { projects = projects.filter(p => p.id !== id); render(); }
     function unlockAdmin() { if(prompt("PASSCODE:") === "5236") { document.body.classList.add('edit-mode'); document.getElementById('admin-panel').style.display='block'; } }
     function lockAdmin() { document.getElementById('admin-panel').style.display='none'; document.body.classList.remove('edit-mode'); }
 
     function exportFinalHTML() {
-        const projData = `let projects = ${JSON.stringify(projects)};`; const structData = `let structure = ${JSON.stringify(structure)};`;
-        let html = document.documentElement.outerHTML.replace(/let projects = \[.*?\];/s, projData).replace(/let structure = \[.*?\];/s, structData);
-        html = html.replace('display: block;', 'display: none;').replace('class="edit-mode"', '');
+        const projData = `let projects = ${JSON.stringify(projects)};`;
+        let html = document.documentElement.outerHTML.replace(/let projects = \[.*?\];/s, projData);
         const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
-        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'portfolio.html'; a.click();
     }
     render();
 </script></body></html>
