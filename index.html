@@ -18,11 +18,12 @@
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
         
         body::before { 
-            content: ''; position: fixed; inset: 0; 
-            background: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); 
-            background-size: clamp(30px, 10vw, 60px) clamp(30px, 10vw, 60px); 
-            pointer-events: none; opacity: 0.15; z-index: 0;
-        }
+			position: fixed; inset: 0;
+			background: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+			background-size: clamp(30px, 10vw, 60px) clamp(30px, 10vw, 60px);
+			pointer-events: none; opacity: 0.15; z-index: 0;
+			-webkit-transform: translateZ(0); transform: translateZ(0);
+		}
 
         header { border-left: 4px solid var(--accent); padding-left: 20px; margin: 40px 0; position: relative; z-index: 2; }
         h1 { font-size: clamp(40px, 8vw, 72px); margin: 0; letter-spacing: -3px; text-transform: uppercase; }
@@ -49,8 +50,8 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; position: relative; z-index: 2; }
         .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; transition: 0.4s; display: flex; flex-direction: column; }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .card-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; margin-bottom: 20px; border: 1px solid var(--border); filter: grayscale(1); transition: 0.3s; }
-        .card:hover .card-img { filter: none; }
+        .card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; margin-bottom: 20px; border: 1px solid var(--border); filter: grayscale(1) brightness(0.7); transition: 0.3s; }
+		.card:hover .card-img { filter: grayscale(0) sepia(0.4) hue-rotate(155deg) saturate(4) brightness(0.85); }
 
         /* V17.1 Style Restore: Small, Bold, Syne Titles */
         .card-title { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; color: var(--text); }
@@ -196,7 +197,7 @@
         document.getElementById('modal-title').innerText = p.title;
         document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
         document.getElementById('modal-body').innerHTML = p.detail || p.desc;
-        document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src => `<img src="${src.trim()}" style="width:100%; border:1px solid var(--border);">`).join('') : '';
+        document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src => `<img src="${src.trim()}" style="width:100%; max-height:420px; object-fit:contain; border:1px solid var(--border);">`).join('') : '';
         document.getElementById('modal-links').innerHTML = p.links ? p.links.split(',').map(l => {
             const parts = l.split(':');
             const label = parts.shift().trim();
