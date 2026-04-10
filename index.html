@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JH_TERMINAL_V15.0</title>
+    <title>JH_TERMINAL_V16.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -14,7 +12,6 @@
             --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif;
         }
         
-        /* Standardize all Lucide icons to 18px within terminal elements */
         .lucide { width: 18px; height: 18px; vertical-align: -4px; stroke-width: 2px; }
         .btn .lucide { width: 14px; height: 14px; vertical-align: middle; }
 
@@ -35,7 +32,11 @@
         .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); box-shadow: 0 0 20px var(--accent), inset 0 0 10px var(--accent-dim); text-shadow: 0 0 8px var(--accent); }
 
         .admin-bar { background: var(--surface); border: 1px solid var(--accent); padding: 25px; margin-bottom: 40px; display: none; box-shadow: 0 0 20px var(--accent-dim); }
+        .admin-section { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .admin-section-title { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+
         input, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; font-family: var(--mono); font-size: 13px; width: 100%; margin-bottom: 15px; box-sizing: border-box; }
+        input:focus, textarea:focus { border-color: var(--accent); outline: none; }
         
         .btn { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; cursor: pointer; font-family: var(--mono); text-transform: uppercase; font-size: 10px; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
         .btn:hover { background: var(--accent-dim); box-shadow: 0 0 15px var(--accent); }
@@ -65,11 +66,10 @@
         .admin-actions { display: none; gap: 10px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; }
         .edit-mode .admin-actions { display: flex; }
         .login-trigger { position: fixed; bottom: 20px; right: 20px; opacity: 0.05; cursor: pointer; font-size: 10px; }
-    </style>
-</head>
-<body>
-
-<div id="detail-modal" onclick="closeModal()">
+        
+        .cat-chip { display: inline-flex; align-items: center; gap: 5px; background: #000; border: 1px solid var(--border); padding: 5px 10px; font-family: var(--mono); font-size: 10px; margin-right: 5px; margin-bottom: 5px; }
+        .cat-chip button { background: none; border: none; color: var(--danger); cursor: pointer; padding: 0 5px; font-weight: bold; }
+    </style></head><body><div id="detail-modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="tagline" id="modal-cat"></div>
         <h2 id="modal-title" style="font-size: clamp(24px, 5vw, 42px); margin: 10px 0; text-transform: uppercase;"></h2>
@@ -77,12 +77,9 @@
         <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px; line-height: 1.8;"></div>
         <div class="modal-links" id="modal-links"></div>
         <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="closeModal()">Close_Terminal</button>
-    </div>
-</div>
-
-<div class="container">
+    </div></div><div class="container">
     <header>
-        <div class="tagline">ARCHIVE_SYSTEM_v15.0 // JH0101</div>
+        <div class="tagline">ARCHIVE_SYSTEM_v16.0 // JH0101</div>
         <h1>John Hall</h1>
         <p style="font-family: var(--mono); color: var(--muted);">SR_ANALYST // AI_ML_ARCHITECTURE</p>
     </header>
@@ -93,41 +90,61 @@
     </div>
 
     <div id="admin-panel" class="admin-bar">
-        <div class="input-group" style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-            <input type="text" id="p-title" placeholder="PROJECT_NAME">
-            <input type="text" id="p-category" placeholder="DOMAIN (e.g. VISUALS)">
+        <div class="admin-section">
+            <div class="admin-section-title">Category_Management</div>
+            <div id="cat-list" style="margin-bottom: 15px;"></div>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="new-cat-name" placeholder="NEW_CATEGORY_NAME" style="margin-bottom:0; flex-grow:1;">
+                <button class="btn" onclick="addNewCategory()">Add_Category</button>
+            </div>
         </div>
-        <input type="text" id="p-img" placeholder="IMAGES (comma separated URLs or filenames)">
-        <input type="text" id="p-links" placeholder="LINKS (Label: URL, Label: URL)">
-        <textarea id="p-desc" rows="2" placeholder="SHORT_CARD_SUMMARY"></textarea>
-        <textarea id="p-detail" rows="6" placeholder="FULL_LOG_DETAIL (Supports HTML)"></textarea>
-        
-        <div style="display:flex; gap:10px; flex-wrap: wrap;">
-            <button class="btn" onclick="saveProject()" id="main-save-btn">Sync_To_Mainframe</button>
-            <button class="btn" onclick="exportFinalHTML()">Download HTML</button>
-            <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display:none">Abort</button>
-            <button class="btn btn-danger" onclick="lockAdmin()" style="margin-left: auto;">Exit_Admin</button>
+
+        <div class="admin-section">
+            <div class="admin-section-title">Project_Editor</div>
+            <div class="input-group" style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
+                <input type="text" id="p-title" placeholder="PROJECT_NAME">
+                <input type="text" id="p-category" placeholder="DOMAIN (e.g. VISUALS)">
+            </div>
+            <input type="text" id="p-img" placeholder="IMAGES (comma separated URLs or filenames)">
+            <input type="text" id="p-links" placeholder="LINKS (Label: URL, Label: URL)">
+            <textarea id="p-desc" rows="2" placeholder="SHORT_CARD_SUMMARY"></textarea>
+            <textarea id="p-detail" rows="6" placeholder="FULL_LOG_DETAIL (Supports HTML)"></textarea>
+            
+            <div style="display:flex; gap:10px; flex-wrap: wrap;">
+                <button class="btn" onclick="saveProject()" id="main-save-btn">Sync_To_Mainframe</button>
+                <button class="btn" onclick="exportFinalHTML()">Download HTML</button>
+                <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display:none">Abort</button>
+                <button class="btn btn-danger" onclick="lockAdmin()" style="margin-left: auto;">Exit_Admin</button>
+            </div>
         </div>
     </div>
 
-    <div class="grid" id="project-grid"></div>
-</div>
-
-<div class="login-trigger" onclick="unlockAdmin()">[ENCRYPTED_LINK]</div>
-
-<script>
+    <div class="grid" id="project-grid"></div></div><div class="login-trigger" onclick="unlockAdmin()">[ENCRYPTED_LINK]</div><script>
+    // DATA CORE
     let projects = [{"id":1,"title":"<i data-lucide='flame'></i> ELEVATED CANDLES","category":"CAREER","desc":"Founder & Data Lead. Developed forecasting models and KPI dashboards.","detail":"<b>Technical Breakdown:</b>\n<i data-lucide='cpu'></i> SQL Server optimization\n<i data-lucide='bar-chart-3'></i> Tableau Dashboard design\n<i data-lucide='trending-up'></i> 40% growth in efficiency.","img":"fall fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/, YouTube: https://www.youtube.com/@Elevatedcandles/videos"},{"id":1775705081632,"title":"<i data-lucide='search'></i> THE Y FILES","category":"CREATIVE","desc":"A documentary exploration of data and storytelling.","detail":"","img":"y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/ ,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"}];
+    let customCategories = ["CAREER", "CREATIVE", "RESEARCH"];
     
     let editingId = null;
     let currentFilter = 'ALL';
 
     function render() {
-        const uniqueCategories = ['ALL', ...new Set(projects.map(p => p.category.toUpperCase()))];
+        // Build unique category list
+        const projectCats = projects.map(p => p.category.toUpperCase());
+        const combined = ['ALL', ...new Set([...customCategories, ...projectCats])];
+        
+        // Render Nav Bar
         const filterBar = document.getElementById('filter-bar');
-        filterBar.innerHTML = uniqueCategories.map(cat => `
+        filterBar.innerHTML = combined.map(cat => `
             <button class="filter-btn ${currentFilter === cat ? 'active' : ''}" onclick="setFilter('${cat}')">${cat}</button>
         `).join('');
 
+        // Render Admin Category Chips
+        const catList = document.getElementById('cat-list');
+        catList.innerHTML = customCategories.map(cat => `
+            <div class="cat-chip">${cat} <button onclick="removeCategory('${cat}')">×</button></div>
+        `).join('');
+
+        // Render Project Grid
         const grid = document.getElementById('project-grid');
         const filtered = currentFilter === 'ALL' ? projects : projects.filter(p => p.category.toUpperCase() === currentFilter);
         
@@ -149,6 +166,23 @@
         lucide.createIcons();
     }
 
+    // CATEGORY METHODS
+    function addNewCategory() {
+        const input = document.getElementById('new-cat-name');
+        const val = input.value.trim().toUpperCase();
+        if (val && !customCategories.includes(val)) {
+            customCategories.push(val);
+            input.value = '';
+            render();
+        }
+    }
+
+    function removeCategory(cat) {
+        customCategories = customCategories.filter(c => c !== cat);
+        render();
+    }
+
+    // MODAL METHODS
     function openModal(id) {
         const p = projects.find(x => x.id === id);
         document.getElementById('modal-title').innerHTML = p.title;
@@ -174,6 +208,7 @@
 
     function setFilter(cat) { currentFilter = cat; render(); }
 
+    // ADMIN LOGIC
     function unlockAdmin() {
         if(prompt("PASSCODE:") === "1234") {
             document.getElementById('admin-panel').style.display = 'block';
@@ -224,16 +259,21 @@
     function deleteProject(id) { if(confirm("DELETE_ENTRY?")) { projects = projects.filter(p => p.id !== id); render(); } }
 
     function exportFinalHTML() {
-        const dataString = `let projects = ${JSON.stringify(projects)};`;
+        const projString = `let projects = ${JSON.stringify(projects)};`;
+        const catString = `let customCategories = ${JSON.stringify(customCategories)};`;
         let html = document.documentElement.outerHTML;
-        html = html.replace(/let projects = \[.*?\];/s, dataString);
+        
+        // Update both projects and custom categories in the file
+        html = html.replace(/let projects = \[.*?\];/s, projString);
+        html = html.replace(/let customCategories = \[.*?\];/s, catString);
+        
+        // Ensure UI state is clean for download
         html = html.replace('display: block;', 'display: none;'); 
         html = html.replace('class="edit-mode"', '');
+        
         const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
     }
-    render();
-</script>
-</body>
-</html>
+    
+    render();</script></body></html>
