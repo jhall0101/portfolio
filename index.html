@@ -5,20 +5,7 @@
     <title>JH_TERMINAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script><style type="text/css" id="operaUserStyle"></style>
-    <style>
-			#p-detail { transition: all 0.3s; }
-			#p-detail.expanded { 
-				position: fixed; inset: 20px; 
-				z-index: 200; 
-				width: calc(100% - 40px); 
-				height: calc(100% - 40px); 
-				box-sizing: border-box; 
-				font-size: 14px; 
-				line-height: 1.8;
-				border-color: var(--accent);
-				box-shadow: 0 0 40px var(--accent-dim);
-				resize: none;
-		}	
+    <style>			
         :root {
             --bg: #030508; --surface: #0a0f16; --border: #1a2633;
             --accent: #00e5ff; --accent-dim: rgba(0, 229, 255, 0.1);
@@ -26,6 +13,20 @@
             --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif;
         }
         
+		#p-detail { transition: all 0.3s; }
+		#p-detail.expanded { 
+			position: fixed; inset: 20px; 
+			z-index: 200; 
+			width: calc(100% - 40px); 
+			height: calc(100% - 40px); 
+			box-sizing: border-box; 
+			font-size: 14px; 
+			line-height: 1.8;
+			border-color: var(--accent);
+			box-shadow: 0 0 40px var(--accent-dim);
+			resize: none;
+		}	
+		
         .lucide { width: 18px; height: 18px; vertical-align: -4px; stroke-width: 2px; }
         body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; padding: 20px; line-height: 1.5; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
@@ -134,7 +135,6 @@
             <textarea id="p-detail" rows="4" placeholder="FULL_LOG (HTML OK)" onfocus="expandLog(this)" onblur="collapseLog(this)"></textarea>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button class="btn" onclick="saveProject()" id="save-btn">Sync_Entry</button>
-                <button class="btn" onclick="exportFinalHTML()">Download_Archive</button>
                 <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display: none;">Abort</button>
                 <button class="btn btn-danger" onclick="lockAdmin()" style="margin-left:auto;">Lock_Terminal</button>
             </div>
