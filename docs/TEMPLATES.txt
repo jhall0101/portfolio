@@ -1,0 +1,51 @@
+CAREER template:
+<b>OVERVIEW</b>
+[1-2 sentences on what this project/role was and its context.]
+
+<b>TOOLS & STACK</b>
+[List tools, software, languages used. E.g. SQL Server, Tableau, Python]
+
+<b>WHAT I DID</b>
+[Specific actions you took. Bullet points work well here.]
+
+<b>OUTCOME</b>
+[Measurable result if possible. E.g. "Reduced reporting time by 40%."]
+
+<b>STATUS</b>
+[Active / Completed / Archived / Ongoing]
+
+CREATIVE template:
+<b>OVERVIEW</b>
+[What this project is and the creative intent behind it.]
+
+<b>MEDIUM & TOOLS</b>
+[E.g. Midjourney v6, Premiere Pro, ACEStep, Blender]
+
+<b>PROCESS</b>
+[Brief notes on how it was made or developed.]
+
+<b>STATUS</b>
+[Active / Completed / Ongoing / In Development]
+
+RESEARCH template:
+<b>TOPIC</b>
+[What this research area covers and why it interests you.]
+
+<b>KEY IDEAS</b>
+[2-3 bullet points of core concepts or questions you're exploring.]
+
+<b>RABBIT HOLES</b>
+[Related topics or tangents worth noting.]
+
+<b>STATUS</b>
+[Ongoing / Shelved / Developed into project]
+
+PERSONAL template:
+<b>ABOUT</b>
+[Casual description — this one doesn't need to impress anyone.]
+
+<b>HIGHLIGHTS</b>
+[Favorite moments, specimens, harvests, whatever applies.]
+
+<b>STATUS</b>
+[Active / Seasonal / Archived]
