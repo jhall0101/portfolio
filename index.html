@@ -392,7 +392,7 @@ Development of a scalable, repeatable content format</div>
         document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
         document.getElementById('modal-body').innerHTML = p.detail || p.desc;
 		document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src =>
-			`<div class="image-wrapper" onclick="zoomImage('${src.trim()}')">
+			`<div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('${src.trim()}')">
 				<img src="${src.trim()}" class="gallery-preview">
 				<div class="zoom-overlay">
 					<i data-lucide="maximize-2"></i>
@@ -418,16 +418,23 @@ Development of a scalable, repeatable content format</div>
 	function zoomImage(src) {
 		const lightbox = document.createElement('div');
 		lightbox.id = 'lightbox';
+		
+		// Inline styles for the lightbox
 		lightbox.style = `
 			position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-			background: rgba(3, 5, 8, 0.95); display: flex; align-items: center;
-			justify-content: center; z-index: 2000; cursor: zoom-out;
-			backdrop-filter: blur(10px);
+			background: rgba(3, 5, 8, 0.98); display: flex; align-items: center;
+			justify-content: center; z-index: 3000; cursor: zoom-out;
+			backdrop-filter: blur(15px);
 		`;
 		
-		lightbox.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; object-fit: contain; border: 1px solid var(--accent); box-shadow: 0 0 30px rgba(0,0,0,0.5);">`;
+		lightbox.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; object-fit: contain; border: 1px solid var(--accent); shadow: 0 0 30px #000;">`;
 		
-		lightbox.onclick = () => lightbox.remove();
+		// Use stopPropagation here so clicking the zoom doesn't trigger the modal's closeModal
+		lightbox.onclick = (e) => {
+			e.stopPropagation();
+			lightbox.remove();
+		};
+		
 		document.body.appendChild(lightbox);
 	}
 
