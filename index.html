@@ -499,7 +499,7 @@
 		html = html.replace(/\s*]*"/g, '');
 		html = html.replace(/<grammarly-desktop-integration[^>]*><\/grammarly-desktop-integration>/g, '');
 		html = html.replace(/<span id="PING_IFRAME_FORM_DETECTION"[^>]*><\/span>/g, '');
-		html = html.replace(/<style[^>]*id="operaUserStyle"[^>]*>.*?<\/style>/gs, '');
+		html = html.replace(/<style[^>]*id="operaUserStyle"[^>]*><\/style>/g, '');
 		const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
 		const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
 	}
