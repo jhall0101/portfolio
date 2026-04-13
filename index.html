@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"><plasmo-csui id="jobright-helper-plugin"></plasmo-csui><head>
+<html lang="en"><plasmo-csui id="jobright-helper-plugin"></plasmo-csui><head><style type="text/css" id="operaUserStyle"></style><style type="text/css"></style></head><body style="overflow: auto;" data-new-gr-c-s-check-loaded="14.1282.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1282.0" ><plasmo-csui id="jobright-helper-plugin"></plasmo-csui>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JH_TERMINAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script><style type="text/css" id="operaUserStyle"></style><style type="text/css" id="operaUserStyle"></style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+	<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" defer></script>
     <style>
         :root {
             --bg: #030508; --surface: #0a0f16; --border: #1a2633;
@@ -65,7 +67,7 @@
 		
 		#modal-gallery img {
 			position: relative;
-			display: block;
+			display: none;
 		}
 
 		/* Optional: Add a slight dimming to the images in the modal 
@@ -153,72 +155,38 @@
         .edit-mode .admin-actions { display: flex; }
         .login-trigger { position: fixed; bottom: 20px; right: 20px; opacity: 0.05; cursor: pointer; font-size: 10px; z-index: 10; }
     </style>
-<style type="text/css"></style></head>
-<body style="overflow: auto;" data-new-gr-c-s-check-loaded="14.1282.0" data-gr-ext-installed=""  data-new-gr-c-s-loaded="14.1282.0">
+<style type="text/css"></style>
+
 
 <div id="detail-modal" onclick="closeModal()" style="display: none;">
     <div class="modal-content" onclick="closeModal()">
-        <div class="tagline" id="modal-cat">DATA_ENTRY // CREATIVE:AI</div>
-        <h2 id="modal-title" style="margin:10px 0; text-transform:uppercase; font-size:clamp(24px,5vw,42px);">Project: THE Y FILES</h2>
-        <div id="modal-gallery" style="display:flex; flex-direction:column; gap:20px; margin:20px 0;"><img src="images/y_files - logo.png" style="width:100%; max-height:420px; object-fit:contain; border:1px solid var(--border);"></div>
-        <div id="modal-body" style="font-family:var(--mono); color:#a1aab8; white-space:pre-wrap; font-size:14px; line-height:1.8;"><h3>Concept &amp; Creative Direction</h3>
-The project explores the contrast between serious investigative tone and insignificant subject matter. Episodes follow a consistent structure:
+        <div class="tagline" id="modal-cat">DATA_ENTRY // CAREER:ANALYTICS</div>
+        <h2 id="modal-title" style="margin:10px 0; text-transform:uppercase; font-size:clamp(24px,5vw,42px);">JusticeLink: Data Infrastructure &amp; Impact Analytics</h2>
+        <div id="modal-gallery" style="display:flex; flex-direction:column; gap:20px; margin:20px 0;"><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/JL_infographic.webp')">
+				<img src="images/JL_infographic.webp" class="gallery-preview">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" aria-hidden="true" class="lucide lucide-maximize-2"><path d="M15 3h6v6"></path><path d="m21 3-7 7"></path><path d="m3 21 7-7"></path><path d="M9 21H3v-6"></path></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/Clients by Area Income.png')">
+				<img src="images/Clients by Area Income.png" class="gallery-preview">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" aria-hidden="true" class="lucide lucide-maximize-2"><path d="M15 3h6v6"></path><path d="m21 3-7 7"></path><path d="m3 21 7-7"></path><path d="M9 21H3v-6"></path></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/JusticeLink ERD Proposal.png')">
+				<img src="images/JusticeLink ERD Proposal.png" class="gallery-preview">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" aria-hidden="true" class="lucide lucide-maximize-2"><path d="M15 3h6v6"></path><path d="m21 3-7 7"></path><path d="m3 21 7-7"></path><path d="M9 21H3v-6"></path></svg>
+				</div>
+			</div></div>
+        <div id="modal-body" style="font-family:var(--mono); color:#a1aab8; white-space:pre-wrap; font-size:14px; line-height:1.8;">Identified and diagnosed critical reporting limitations within a Salesforce environment that prioritized user interface design over business-critical data relationships. Conducted extensive research into normalization principles to propose a new relational data structure, aimed at eliminating manual workarounds and enhancing system scalability.
+<div style="color:var(--border); font-family:var(--mono); margin: 1px 0;">--------------------------------------------------------------------------------------------------------</div><h2 style="color:cyan; margin:0px; margin-bottom: 8px;">Key Technical Achievements</h2><b>• Relational Data Modeling:</b> Architected a data model identifying key entities and attributes to directly improve the accuracy of queries and reports.
 
-Ominous, controlled setup
-Evidence-driven forensic analysis
-Absurd but inevitable conclusion
-Deadpan closing statement
+<b>• Normalization Strategy:</b> Implemented normalization principles to create independent objects for individual business concepts, enhancing system scalability and flexibility.
 
-The writing emphasizes:
+<b>• Outcome Tracking &amp; Reporting:</b> Designed specialized schemas to track completed client goals and service plan timelines, providing a solution for reporting long-term service impacts.
 
-Behavioral analysis framed as forensic evidence
-Clear violations and accountability
-Clinical, objective tone without comedic delivery cues
-
-Example cases include missing food, thermostat changes, and interrupted television viewing, all treated with the gravity of formal investigations .
-
-<hr>
-<h3>Audio &amp; Voice Design</h3>
-The narration is produced using AI voice synthesis, designed to replicate the cadence, pacing, and tonal characteristics of classic true-crime documentary narrators.
-
-Key considerations:
-
-Controlled pacing and intentional pauses to create tension
-Low-dynamic delivery to maintain a documentary feel
-Subtle background scoring to support, not overpower, narration
-Silence used as a structural tool for emphasis
-
-The result is an audio experience that feels authentic to the genre while delivering contrast-driven humor.
-
-<hr>
-<h3>Technical Implementation</h3>
-Scriptwriting and narrative structure designed for 60–90 second formats
-Voice generated using AI text-to-speech / voice cloning tools
-Audio post-processing includes:
-Timing refinement
-Background music layering
-Level balancing and clarity optimization
-Final output formatted for social media distribution (Reels, Shorts, etc.) using static or minimal visual assets
-
-<hr>
-<h3>Branding &amp; Presentation</h3>
-
-The project is presented as a serialized collection of "case files," supported by:
-
-Minimal, modern visual identity (logo + banner)
-Consistent episode titling (e.g., Crumbs of Evidence, Degrees of Deception)
-Standalone episodes that build a cohesive series over time
-
-<hr>
-<h3>Outcome &amp; Purpose</h3>
-
-This project demonstrates:
-
-Ability to blend creative writing with structured narrative systems
-Use of AI tools for voice synthesis and content production
-Understanding of tone, pacing, and audience perception in audio media
-Development of a scalable, repeatable content format</div>
-        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;" onclick="event.stopPropagation()"><a href="https://www.facebook.com/share/v/1CMZ5irfWt/" target="_blank" class="btn">EP1</a><a href="https://www.facebook.com/share/v/1DrBcmPFzN/" target="_blank" class="btn">EP2</a><a href="https://www.facebook.com/share/v/1KMs9my3ps/" target="_blank" class="btn">EP3</a></div>
+<b>• Comprehensive System Mapping:</b> Produced a high-level ERD detailing complex relationships between staff, court proceedings (motions, warrants, outcomes), and client services.</div>
+        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;" onclick="event.stopPropagation()"></div>
         <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="event.stopPropagation(); closeModal()" fdprocessedid="oxd1wp">Close_Terminal</button>
     </div>
 </div>
@@ -235,7 +203,7 @@ Development of a scalable, repeatable content format</div>
         <div class="sub-nav" id="sub-filter-bar" style="display: none;"><button class="sub-btn active" onclick="setChild('ALL')" fdprocessedid="bpmamp">[ ALL ]</button><button class="sub-btn " onclick="setChild('ANALYTICS')" fdprocessedid="92jj1f">[ ANALYTICS ]</button><button class="sub-btn " onclick="setChild('CODE')" fdprocessedid="v1hk3">[ CODE ]</button><button class="sub-btn " onclick="setChild('OPERATIONS')" fdprocessedid="5ql9z">[ OPERATIONS ]</button></div>
     </div>
 
-    <div id="admin-panel" class="admin-bar" style="display: none;">
+    <div id="admin-panel" class="admin-bar" style="display: block;">
         <!-- Structure_Manager -->
         <div class="admin-section">
             <div class="tagline" style="margin-bottom:10px;">Structure_Manager</div>
@@ -267,7 +235,7 @@ Development of a scalable, repeatable content format</div>
 
     <div class="grid" id="project-grid">
             <div class="card" onclick="openModal(1)" style="cursor:pointer;">
-                <img src="images/fall fantasy.png" class="card-img">
+                <img src="images/fall-fantasy.png" class="card-img">
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CAREER &gt; OPERATIONS</div>
                 <div class="card-title">ELEVATED CANDLES</div>
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">Founder &amp; Data Lead.</p>
@@ -279,7 +247,7 @@ Development of a scalable, repeatable content format</div>
             </div>
         
             <div class="card" onclick="openModal(2)" style="cursor:pointer;">
-                <img src="images/y_files - logo.png" class="card-img">
+                <img src="images/yfiles-pallete.webp" class="card-img">
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CREATIVE &gt; AI</div>
                 <div class="card-title">Project: THE Y FILES</div>
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">The Y Files is a short-form audio series that parodies true-crime documentaries by applying forensic investigative storytelling to trivial domestic events. Each episode presents a self-contained "case," using a deadpan, documentary-style narration to examine everyday social violations with exaggerated analytical rigor.</p>
@@ -291,7 +259,7 @@ Development of a scalable, repeatable content format</div>
             </div>
         
             <div class="card" onclick="openModal(1775869089791)" style="cursor:pointer;">
-                <img src="images/interface design.jpg" class="card-img">
+                <img src="images/otc-interface.webp" class="card-img">
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CAREER &gt; CODE</div>
                 <div class="card-title">Solo Developer | Custom Tax Form Management System</div>
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I served as the sole developer for this two-year project, taking a government agency from manual Excel tracking to a fully automated database solution. The application manages the lifecycle of tax forms received from various state vendors, ensuring version control and data integrity.</p>
@@ -303,7 +271,7 @@ Development of a scalable, repeatable content format</div>
             </div>
         
             <div class="card" onclick="openModal(1775961473205)" style="cursor:pointer;">
-                <img src="images/JL Data Infographic.png" class="card-img">
+                <img src="images/JL_infographic.webp" class="card-img">
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CAREER &gt; ANALYTICS</div>
                 <div class="card-title">JusticeLink: Data Infrastructure &amp; Impact Analytics</div>
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">Architected a comprehensive relational data model and infrastructure plan to transition a community-focused organization from UI-centric Salesforce constraints to a robust, report-ready relational database.</p>
@@ -319,7 +287,7 @@ Development of a scalable, repeatable content format</div>
 <div class="login-trigger" onclick="unlockAdmin()">[SYSTEM_KEY]</div>
 
 <script>
-    let projects = [{"id":1,"title":"ELEVATED CANDLES","category":"CAREER:OPERATIONS","desc":"Founder & Data Lead.","detail":"<b>Technical Breakdown:</b>\nSQL Server optimization and KPI dashboards.","img":"images/fall fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/, YouTube: https://www.youtube.com/@Elevatedcandles/videos"},{"id":2,"title":"Project: THE Y FILES","category":"CREATIVE:AI","desc":"The Y Files is a short-form audio series that parodies true-crime documentaries by applying forensic investigative storytelling to trivial domestic events. Each episode presents a self-contained \"case,\" using a deadpan, documentary-style narration to examine everyday social violations with exaggerated analytical rigor.","detail":"<H3>Concept & Creative Direction</H3>\nThe project explores the contrast between serious investigative tone and insignificant subject matter. Episodes follow a consistent structure:\n\nOminous, controlled setup\nEvidence-driven forensic analysis\nAbsurd but inevitable conclusion\nDeadpan closing statement\n\nThe writing emphasizes:\n\nBehavioral analysis framed as forensic evidence\nClear violations and accountability\nClinical, objective tone without comedic delivery cues\n\nExample cases include missing food, thermostat changes, and interrupted television viewing, all treated with the gravity of formal investigations .\n\n<hr>\n<h3>Audio & Voice Design</h3>\nThe narration is produced using AI voice synthesis, designed to replicate the cadence, pacing, and tonal characteristics of classic true-crime documentary narrators.\n\nKey considerations:\n\nControlled pacing and intentional pauses to create tension\nLow-dynamic delivery to maintain a documentary feel\nSubtle background scoring to support, not overpower, narration\nSilence used as a structural tool for emphasis\n\nThe result is an audio experience that feels authentic to the genre while delivering contrast-driven humor.\n\n<hr>\n<h3>Technical Implementation</h3>\nScriptwriting and narrative structure designed for 60–90 second formats\nVoice generated using AI text-to-speech / voice cloning tools\nAudio post-processing includes:\nTiming refinement\nBackground music layering\nLevel balancing and clarity optimization\nFinal output formatted for social media distribution (Reels, Shorts, etc.) using static or minimal visual assets\n\n<hr>\n<h3>Branding & Presentation</h3>\n\nThe project is presented as a serialized collection of \"case files,\" supported by:\n\nMinimal, modern visual identity (logo + banner)\nConsistent episode titling (e.g., Crumbs of Evidence, Degrees of Deception)\nStandalone episodes that build a cohesive series over time\n\n<hr>\n<h3>Outcome & Purpose</h3>\n\nThis project demonstrates:\n\nAbility to blend creative writing with structured narrative systems\nUse of AI tools for voice synthesis and content production\nUnderstanding of tone, pacing, and audience perception in audio media\nDevelopment of a scalable, repeatable content format","img":"images/y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"},{"id":1775869089791,"title":"Solo Developer | Custom Tax Form Management System","category":"CAREER:CODE","desc":"I served as the sole developer for this two-year project, taking a government agency from manual Excel tracking to a fully automated database solution. The application manages the lifecycle of tax forms received from various state vendors, ensuring version control and data integrity.","detail":"• <strong>Advanced Automation:</strong> Built a scanning module that interfaces with handheld scanners to read QR/2D barcodes, automatically loading the corresponding PDF page and linking data to the database.\n\n• <strong>Robust Backend:</strong> Designed a relational schema to handle complex many-to-many relationships between vendors, forms, and administrative reviews.\n\n• <strong>Full-Stack UI:</strong> Created a custom GUI (1,000+ lines of VBA) featuring a \"Clipboard\" system for batch reporting, dynamic search filters, and automated status color-coding.\n\n• <strong>Communication Layer:</strong> Integrated MS Outlook automation to send real-time notifications to users regarding pending reviews and due dates.","img":"images/interface design.jpg, images/relationships.jpg, images/tables.jpg","links":""},{"id":1775961473205,"title":"JusticeLink: Data Infrastructure & Impact Analytics","category":"CAREER:ANALYTICS","desc":"Architected a comprehensive relational data model and infrastructure plan to transition a community-focused organization from UI-centric Salesforce constraints to a robust, report-ready relational database.","detail":"Identified and diagnosed critical reporting limitations within a Salesforce environment that prioritized user interface design over business-critical data relationships. Conducted extensive research into normalization principles to propose a new relational data structure, aimed at eliminating manual workarounds and enhancing system scalability.\n<hr><h2 style=\"color:cyan; margin:0; margin-bottom: 1px;\">Key Technical Achievements</h2><b>• Relational Data Modeling:</b> Architected a data model identifying key entities and attributes to directly improve the accuracy of queries and reports.\n\n<b>• Normalization Strategy:</b> Implemented normalization principles to create independent objects for individual business concepts, enhancing system scalability and flexibility.\n\n<b>• Outcome Tracking & Reporting:</b> Designed specialized schemas to track completed client goals and service plan timelines, providing a solution for reporting long-term service impacts.\n\n<b>• Comprehensive System Mapping:</b> Produced a high-level ERD detailing complex relationships between staff, court proceedings (motions, warrants, outcomes), and client services.","img":"images/JL Data Infographic.png, images/Clients by Area Income.png, images/JusticeLink ERD Proposal.png","links":""}];
+    let projects = [{"id":1,"title":"ELEVATED CANDLES","category":"CAREER:OPERATIONS","desc":"Founder & Data Lead.","detail":"<b>Technical Breakdown:</b>\nSQL Server optimization and KPI dashboards.","img":"images/fall-fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/, YouTube: https://www.youtube.com/@Elevatedcandles/videos"},{"id":2,"title":"Project: THE Y FILES","category":"CREATIVE:AI","desc":"The Y Files is a short-form audio series that parodies true-crime documentaries by applying forensic investigative storytelling to trivial domestic events. Each episode presents a self-contained \"case,\" using a deadpan, documentary-style narration to examine everyday social violations with exaggerated analytical rigor.","detail":"<H3>Concept & Creative Direction</H3>\nThe project explores the contrast between serious investigative tone and insignificant subject matter. Episodes follow a consistent structure:\n\nOminous, controlled setup\nEvidence-driven forensic analysis\nAbsurd but inevitable conclusion\nDeadpan closing statement\n\nThe writing emphasizes:\n\nBehavioral analysis framed as forensic evidence\nClear violations and accountability\nClinical, objective tone without comedic delivery cues\n\nExample cases include missing food, thermostat changes, and interrupted television viewing, all treated with the gravity of formal investigations .\n\n<hr>\n<h3>Audio & Voice Design</h3>\nThe narration is produced using AI voice synthesis, designed to replicate the cadence, pacing, and tonal characteristics of classic true-crime documentary narrators.\n\nKey considerations:\n\nControlled pacing and intentional pauses to create tension\nLow-dynamic delivery to maintain a documentary feel\nSubtle background scoring to support, not overpower, narration\nSilence used as a structural tool for emphasis\n\nThe result is an audio experience that feels authentic to the genre while delivering contrast-driven humor.\n\n<hr>\n<h3>Technical Implementation</h3>\nScriptwriting and narrative structure designed for 60–90 second formats\nVoice generated using AI text-to-speech / voice cloning tools\nAudio post-processing includes:\nTiming refinement\nBackground music layering\nLevel balancing and clarity optimization\nFinal output formatted for social media distribution (Reels, Shorts, etc.) using static or minimal visual assets\n\n<hr>\n<h3>Branding & Presentation</h3>\n\nThe project is presented as a serialized collection of \"case files,\" supported by:\n\nMinimal, modern visual identity (logo + banner)\nConsistent episode titling (e.g., Crumbs of Evidence, Degrees of Deception)\nStandalone episodes that build a cohesive series over time\n\n<hr>\n<h3>Outcome & Purpose</h3>\n\nThis project demonstrates:\n\nAbility to blend creative writing with structured narrative systems\nUse of AI tools for voice synthesis and content production\nUnderstanding of tone, pacing, and audience perception in audio media\nDevelopment of a scalable, repeatable content format","img":"images/y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"},{"id":1775869089791,"title":"Solo Developer | Custom Tax Form Management System","category":"CAREER:CODE","desc":"I served as the sole developer for this two-year project, taking a government agency from manual Excel tracking to a fully automated database solution. The application manages the lifecycle of tax forms received from various state vendors, ensuring version control and data integrity.","detail":"• <strong>Advanced Automation:</strong> Built a scanning module that interfaces with handheld scanners to read QR/2D barcodes, automatically loading the corresponding PDF page and linking data to the database.\n\n• <strong>Robust Backend:</strong> Designed a relational schema to handle complex many-to-many relationships between vendors, forms, and administrative reviews.\n\n• <strong>Full-Stack UI:</strong> Created a custom GUI (1,000+ lines of VBA) featuring a \"Clipboard\" system for batch reporting, dynamic search filters, and automated status color-coding.\n\n• <strong>Communication Layer:</strong> Integrated MS Outlook automation to send real-time notifications to users regarding pending reviews and due dates.","img":"images/interface design.jpg, images/relationships.jpg, images/tables.jpg","links":""},{"id":1775961473205,"title":"JusticeLink: Data Infrastructure & Impact Analytics","category":"CAREER:ANALYTICS","desc":"Architected a comprehensive relational data model and infrastructure plan to transition a community-focused organization from UI-centric Salesforce constraints to a robust, report-ready relational database.","detail":"Identified and diagnosed critical reporting limitations within a Salesforce environment that prioritized user interface design over business-critical data relationships. Conducted extensive research into normalization principles to propose a new relational data structure, aimed at eliminating manual workarounds and enhancing system scalability.\n<div style=\"color:var(--border); font-family:var(--mono); margin: 1px 0;\">--------------------------------------------------------------------------------------------------------</div><h2 style=\"color:cyan; margin:0px; margin-bottom: 8px;\">Key Technical Achievements</h2><b>• Relational Data Modeling:</b> Architected a data model identifying key entities and attributes to directly improve the accuracy of queries and reports.\n\n<b>• Normalization Strategy:</b> Implemented normalization principles to create independent objects for individual business concepts, enhancing system scalability and flexibility.\n\n<b>• Outcome Tracking & Reporting:</b> Designed specialized schemas to track completed client goals and service plan timelines, providing a solution for reporting long-term service impacts.\n\n<b>• Comprehensive System Mapping:</b> Produced a high-level ERD detailing complex relationships between staff, court proceedings (motions, warrants, outcomes), and client services.","img":"images/JL_infographic.webp, images/Clients by Area Income.png, images/JusticeLink ERD Proposal.png","links":""}];
     let structure = ["CAREER:ANALYTICS","CAREER:CODE","RESEARCH"];
 
     let currentParent = 'ALL';
@@ -363,7 +331,7 @@ Development of a scalable, repeatable content format</div>
 
         document.getElementById('project-grid').innerHTML = filtered.map(p => `
             <div class="card" onclick="openModal(${p.id})" style="cursor:pointer;">
-                ${p.img ? `<img src="${p.img.split(',')[0]}" class="card-img">` : ''}
+                ${p.img ? `<img src="${p.img.split(',')[0].trim()}" class="card-img" width="640" height="360" loading="lazy" alt="${p.title}">` : ''}
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// ${p.category.replace(':', ' > ')}</div>
                 <div class="card-title">${p.title}</div>
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">${p.desc}</p>
@@ -393,7 +361,7 @@ Development of a scalable, repeatable content format</div>
         document.getElementById('modal-body').innerHTML = p.detail || p.desc;
 		document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src =>
 			`<div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('${src.trim()}')">
-				<img src="${src.trim()}" class="gallery-preview">
+				<img src="${src.trim()}" class="gallery-preview" loading="lazy" alt="">
 				<div class="zoom-overlay">
 					<i data-lucide="maximize-2"></i>
 				</div>
@@ -489,11 +457,16 @@ Development of a scalable, repeatable content format</div>
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
     }
 
-    render();
+    if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', render);
+	} else {
+		render();
+	}
 </script>
 
 
 
 
 <span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+</body></html>
