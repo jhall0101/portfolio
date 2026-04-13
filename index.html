@@ -65,6 +65,47 @@
 			filter: grayscale(100%) sepia(100%) hue-rotate(145deg) saturate(600%) brightness(1.1); 
 		}	
 		
+		#focal-picker {
+			display: none;
+			position: relative;
+			width: 100%;
+			height: 200px;
+			overflow: hidden;
+			border: 1px solid var(--accent);
+			margin-bottom: 15px;
+			cursor: crosshair;
+		}
+		#focal-picker img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			pointer-events: none;
+		}
+		#focal-dot {
+			position: absolute;
+			width: 14px;
+			height: 14px;
+			background: var(--accent);
+			border-radius: 50%;
+			transform: translate(-50%, -50%);
+			pointer-events: none;
+			box-shadow: 0 0 10px var(--accent);
+			border: 2px solid #fff;
+		}
+		#focal-label {
+			position: absolute;
+			bottom: 8px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-family: var(--mono);
+			font-size: 9px;
+			color: var(--accent);
+			background: rgba(3,5,8,0.8);
+			padding: 3px 8px;
+			pointer-events: none;
+			letter-spacing: 2px;
+		}
+		
 		/* Container for the preview */
 		.image-wrapper {
 			position: relative;
@@ -203,8 +244,13 @@
                 <input type="text" id="p-title" placeholder="PROJECT_NAME" fdprocessedid="q5nx7d">
                 <input type="text" id="p-category" placeholder="DOMAIN (PARENT:CHILD)" fdprocessedid="cnpm1">
             </div>
-            <input type="text" id="p-img" placeholder="IMAGE_URLS (Comma separated)" fdprocessedid="2hzzf">
-			<input type="text" id="p-imgpos" placeholder="IMAGE FOCAL POINT (e.g. center top, 50% 30%) — optional">
+            <input type="text" id="p-img" placeholder="IMAGE_URLS (Comma separated)" oninput="updateFocalPicker()" fdprocessedid="2hzzf">
+			<input type="text" id="p-imgpos" placeholder="IMAGE FOCAL POINT — or click preview below" oninput="updateFocalDot()">
+			<div id="focal-picker" onclick="setFocalPoint(event)">
+				<img id="focal-img" src="">
+				<div id="focal-dot" style="left:50%; top:50%;"></div>
+				<div id="focal-label">CLICK TO SET FOCAL POINT</div>
+			</div>
             <input type="text" id="p-links" placeholder="LABEL:URL, LABEL:URL" fdprocessedid="duarsx">
             <textarea id="p-desc" rows="2" placeholder="SHORT_SUMMARY"></textarea>
             <textarea id="p-detail" placeholder="FULL_LOG (HTML OK)"></textarea>
@@ -418,6 +464,7 @@
         document.getElementById('save-btn').innerText = "Update_Entry";
         document.getElementById('cancel-btn').style.display = "inline-flex";
         window.scrollTo({top: 0, behavior: 'smooth'});
+		updateFocalPicker();
     }
 
     function cancelEdit() {
@@ -425,6 +472,7 @@
         ['p-title','p-category','p-desc','p-detail','p-img','p-imgpos','p-links'].forEach(id => document.getElementById(id).value = '');
         document.getElementById('save-btn').innerText = "Sync_Entry";
         document.getElementById('cancel-btn').style.display = "none";
+		document.getElementById('focal-picker').style.display = 'none';
     }
 
     function deleteProject(id) { if(confirm("WIPE ENTRY?")) { projects = projects.filter(p => p.id !== id); render(); } }
@@ -432,21 +480,61 @@
     function lockAdmin() { document.getElementById('admin-panel').style.display='none'; document.body.classList.remove('edit-mode'); }
 
     function exportFinalHTML() {
-        const projData = `let projects = ${JSON.stringify(projects)};`;
-        const structData = `let structure = ${JSON.stringify(structure)};`;
-        let html = document.documentElement.outerHTML;
-        html = html.replace(/let projects = \[.*?\];/s, projData);
-        html = html.replace(/let structure = \[.*?\];/s, structData);
-        html = html.replace('display: block;', 'display: none;');
-        html = html.replace('class="edit-mode"', '');
-        const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
-        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
-    }
+		const projData = `let projects = ${JSON.stringify(projects)};`;
+		const structData = `let structure = ${JSON.stringify(structure)};`;
+		let html = document.documentElement.outerHTML;
+		html = html.replace(/let projects = \[.*?\];/s, projData);
+		html = html.replace(/let structure = \[.*?\];/s, structData);
+		html = html.replace('display: block;', 'display: none;');
+		html = html.replace('class="edit-mode"', '');
+		// Strip browser extension injections
+		html = html.replace(/<plasmo-csui[^>]*>.*?<\/plasmo-csui>/gs, '');
+		html = html.replace(/<plasmo-csui[^>]*\/>/gs, '');
+		html = html.replace(/<plasmo-csui[^>]*>/gs, '');
+		html = html.replace(/\s*fdprocessedid="[^"]*"/g, '');
+		html = html.replace(/<grammarly-desktop-integration[^>]*><\/grammarly-desktop-integration>/g, '');
+		html = html.replace(/<span id="PING_IFRAME_FORM_DETECTION"[^>]*><\/span>/g, '');
+		html = html.replace(/<style[^>]*id="operaUserStyle"[^>]*>.*?<\/style>/gs, '');
+		const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
+		const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
+	}
 
     if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', render);
 	} else {
 		render();
+	}
+	
+	function updateFocalPicker() {
+		const imgVal = document.getElementById('p-img').value.trim();
+		const firstImg = imgVal.split(',')[0].trim();
+		const picker = document.getElementById('focal-picker');
+		if (firstImg) {
+			document.getElementById('focal-img').src = firstImg;
+			picker.style.display = 'block';
+			updateFocalDot();
+		} else {
+			picker.style.display = 'none';
+		}
+	}
+
+	function updateFocalDot() {
+		const pos = document.getElementById('p-imgpos').value.trim() || '50% 50%';
+		const parts = pos.split(' ');
+		const x = parts[0] || '50%';
+		const y = parts[1] || '50%';
+		const dot = document.getElementById('focal-dot');
+		dot.style.left = x;
+		dot.style.top = y;
+	}
+
+	function setFocalPoint(e) {
+		const picker = document.getElementById('focal-picker');
+		const rect = picker.getBoundingClientRect();
+		const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+		const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+		document.getElementById('p-imgpos').value = `${x}% ${y}%`;
+		updateFocalDot();
 	}
 </script>
 
