@@ -394,7 +394,7 @@
         document.getElementById('modal-body').innerHTML = p.detail || p.desc;
 		document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src =>
 			`<div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('${src.trim()}')">
-				<img src="${src.trim()}" class="gallery-preview" loading="lazy" alt="" style="object-fit: ${p.imgFit || 'contain'}; object-position: center;">
+				<img src="${src.trim()}" class="gallery-preview" loading="lazy" alt="" style="object-fit: ${p.imgFit || 'contain'}; object-position: ${p.imgPos || 'center'};">
 				<div class="zoom-overlay">
 					<i data-lucide="maximize-2"></i>
 				</div>
