@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"><plasmo-csui id="jobright-helper-plugin"></plasmo-csui><head>
+<html lang="en"><head><style type="text/css"></style><style type="text/css" id="operaUserStyle"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style><style type="text/css"></style></head><body style="overflow: auto;" data-new-gr-c-s-check-loaded="14.1284.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1284.0" ><style type="text/css"></style><style type="text/css"></style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JH_TERMINAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script><style type="text/css" id="operaUserStyle"></style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
+	<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" defer=""></script>
     <style>
         :root {
             --bg: #030508; --surface: #0a0f16; --border: #1a2633;
@@ -12,18 +14,24 @@
             --text: #e8edf5; --muted: #5a6478; --danger: #ff4b4b;
             --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif;
         }
-        
+
+        #p-detail {
+            height: 500px;
+            overflow-y: auto;
+            resize: vertical;
+        }
+
         .lucide { width: 18px; height: 18px; vertical-align: -4px; stroke-width: 2px; }
         body { background: var(--bg); color: var(--text); font-family: var(--display); margin: 0; padding: 20px; line-height: 1.5; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-        
-        body::before { 
-			content: ''; position: fixed; inset: 0; 
-			background: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); 
-			background-size: clamp(30px, 10vw, 60px) clamp(30px, 10vw, 60px); 
-			pointer-events: none; opacity: 0.15; z-index: 0;
-			-webkit-transform: translateZ(0); transform: translateZ(0);
-		}
+
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: clamp(30px, 10vw, 60px) clamp(30px, 10vw, 60px);
+            pointer-events: none; opacity: 0.15; z-index: 0;
+            -webkit-transform: translateZ(0); transform: translateZ(0);
+        }
 
         header { border-left: 4px solid var(--accent); padding-left: 20px; margin: 40px 0; position: relative; z-index: 2; }
         h1 { font-size: clamp(40px, 8vw, 72px); margin: 0; letter-spacing: -3px; text-transform: uppercase; }
@@ -32,17 +40,19 @@
         .nav-zone { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 25px; position: relative; z-index: 2; }
         .filter-list { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px; }
         .sub-nav { display: flex; gap: 10px; flex-wrap: wrap; padding: 10px 20px; background: rgba(0,229,255,0.03); border-left: 2px solid var(--accent); margin-top: 10px; display: none; }
-        
+
         .filter-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 8px 16px; font-family: var(--mono); font-size: 10px; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); box-shadow: 0 0 15px var(--accent-dim); }
-        
+        .filter-btn:hover { background: var(--accent-dim); box-shadow: 0 0 15px var(--accent); border-color: var(--accent); color: var(--accent); }
+
         .sub-btn { font-family: var(--mono); font-size: 9px; color: var(--muted); background: none; border: none; cursor: pointer; text-transform: uppercase; padding: 4px 8px; }
         .sub-btn.active { color: var(--bg); background: var(--accent); font-weight: bold; }
+        .sub-btn:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 
         .admin-bar { background: var(--surface); border: 1px solid var(--accent); padding: 25px; margin-bottom: 40px; display: none; box-shadow: 0 0 20px var(--accent-dim); position: relative; z-index: 5; }
         .admin-section { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
         input, textarea { background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; font-family: var(--mono); font-size: 13px; width: 100%; margin-bottom: 15px; box-sizing: border-box; }
-        
+
         .btn { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; cursor: pointer; font-family: var(--mono); text-transform: uppercase; font-size: 10px; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
         .btn:hover { background: var(--accent-dim); box-shadow: 0 0 15px var(--accent); }
         .btn-danger { border-color: var(--danger); color: var(--danger); }
@@ -51,27 +61,206 @@
         .card { background: var(--surface); border: 1px solid var(--border); padding: 25px; transition: 0.4s; display: flex; flex-direction: column; }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; margin-bottom: 20px; border: 1px solid var(--border); filter: grayscale(1) brightness(0.7); transition: 0.3s; }
-		.card:hover .card-img { filter: grayscale(0) sepia(0.4) hue-rotate(155deg) saturate(4) brightness(0.85); }
+        .card:hover .card-img { 
+			filter: grayscale(100%) sepia(100%) hue-rotate(145deg) saturate(400%) brightness(1.1); 
+		}	
+		
+		#focal-picker {
+			display: none;
+			position: relative;
+			width: 100%;
+			height: 340px;
+			overflow: hidden;
+			border: 1px solid var(--accent);
+			margin-bottom: 15px;
+			cursor: crosshair;
+		}
+		#focal-picker img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			pointer-events: none;
+		}
+		#focal-dot {
+			position: absolute;
+			width: 14px;
+			height: 14px;
+			background: var(--accent);
+			border-radius: 50%;
+			transform: translate(-50%, -50%);
+			pointer-events: none;
+			box-shadow: 0 0 10px var(--accent);
+			border: 2px solid #fff;
+		}
+		#focal-label {
+			position: absolute;
+			bottom: 8px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-family: var(--mono);
+			font-size: 9px;
+			color: var(--accent);
+			background: rgba(3,5,8,0.8);
+			padding: 3px 8px;
+			pointer-events: none;
+			letter-spacing: 2px;
+		}
+		
+		/* Container for the preview */
+		.image-wrapper {
+			position: relative;
+			width: 100%;
+			height: 350px; /* Standardizes your "Option 2" look */
+			margin-bottom: 20px;
+			cursor: pointer;
+			overflow: hidden;
+			border: 1px solid var(--border);
+			background: var(--bg);
+		}
 
-        /* V17.1 Style Restore: Small, Bold, Syne Titles */
+		/* The preview image - starts slightly dim and gray */
+		.gallery-preview {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			object-position: center;
+			background: var(--bg);
+			filter: brightness(0.6) grayscale(0.5); 
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		/* Hover: Brings back color and brightness */
+		.image-wrapper:hover .gallery-preview {
+			filter: brightness(1) grayscale(0);
+			transform: scale(1.03);
+		}
+
+		/* The Cyan Overlay with the Lucide Icon */
+		.zoom-overlay {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			background: rgba(0, 229, 255, 0.15); /* Slight cyan tint */
+			transition: opacity 0.3s ease;
+			color: var(--accent); /* Makes the icon Cyan */
+		}
+
+		/* This targets the Lucide icon specifically */
+		.zoom-overlay svg {
+			width: 32px;
+			height: 32px;
+			filter: drop-shadow(0 0 8px var(--accent)); /* Gives the icon a terminal glow */
+		}
+
+		.image-wrapper:hover .zoom-overlay {
+			opacity: 1;
+		}
+
+		/* Responsive Scaling */
+		@media (max-width: 768px) {
+			.image-wrapper { height: 250px; }
+			.zoom-overlay { 
+				opacity: 1; 
+				background: none; 
+				align-items: flex-end; 
+				justify-content: flex-end; 
+				padding: 15px; 
+			}
+		}
+
+        /* LOCKED — DO NOT CHANGE */
         .card-title { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; color: var(--text); }
 
         #detail-modal { position: fixed; inset: 0; background: rgba(3,5,8,0.98); z-index: 100; display: none; align-items: flex-start; justify-content: center; padding: 40px 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .modal-content { background: var(--surface); border: 1px solid var(--accent); max-width: 900px; width: 100%; padding: 40px; position: relative; }
-        
+
         .admin-actions { display: none; gap: 10px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; }
         .edit-mode .admin-actions { display: flex; }
         .login-trigger { position: fixed; bottom: 20px; right: 20px; opacity: 0.05; cursor: pointer; font-size: 10px; z-index: 10; }
-    </style><style type="text/css"></style></head><body data-new-gr-c-s-check-loaded="14.1282.0" data-gr-ext-installed=""  style="overflow: auto;">
+    </style>
+<style type="text/css"></style>
+
 
 <div id="detail-modal" onclick="closeModal()" style="display: none;">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <div class="tagline" id="modal-cat">DATA_ENTRY // CREATIVE:DOCUMENTARY</div>
-        <h2 id="modal-title" style="margin: 10px 0; text-transform: uppercase; font-size: clamp(24px, 5vw, 42px);">THE Y FILES</h2>
-        <div id="modal-gallery" style="display:flex; flex-direction:column; gap:20px; margin:20px 0;"><img src="y_files - logo.png" style="width:100%; max-height:420px; object-fit:contain; border:1px solid var(--border);"></div>
-        <div id="modal-body" style="font-family: var(--mono); color: #a1aab8; white-space: pre-wrap; font-size: 14px; line-height: 1.8;">Log entries covering various episodes and data narratives.</div>
-        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;"><a href="https://www.facebook.com/share/v/1CMZ5irfWt/" target="_blank" class="btn">EP1</a><a href="https://www.facebook.com/share/v/1DrBcmPFzN/" target="_blank" class="btn">EP2</a><a href="https://www.facebook.com/share/v/1KMs9my3ps/" target="_blank" class="btn">EP3</a></div>
-        <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="closeModal()">Close_Terminal</button>
+    <div class="modal-content" onclick="closeModal()">
+        <div class="tagline" id="modal-cat">DATA_ENTRY // CAREER:OPERATIONS</div>
+        <h2 id="modal-title" style="margin:10px 0; text-transform:uppercase; font-size:clamp(24px,5vw,42px);">ELEVATED CANDLES | SOY REPUBLIC</h2>
+        <div id="modal-gallery" style="display:flex; flex-direction:column; gap:20px; margin:20px 0;"><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/elevated-logo.webp')">
+				<img src="images/elevated-logo.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/elevated-white.webp')">
+				<img src="images/elevated-white.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/elevated-amber.webp')">
+				<img src="images/elevated-amber.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/candles-faire.webp')">
+				<img src="images/candles-faire.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/candle-classes.webp')">
+				<img src="images/candle-classes.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/bison-candles.webp')">
+				<img src="images/bison-candles.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div><div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('images/fragrance-finder.webp')">
+				<img src="images/fragrance-finder.webp" class="gallery-preview" loading="lazy" alt="" style="object-fit: cover; object-position: 49% 45%;">
+				<div class="zoom-overlay">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="maximize-2" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+				</div>
+			</div></div>
+        <div id="modal-body" style="font-family:var(--mono); color:#a1aab8; white-space:pre-wrap; font-size:14px; line-height:1.8;"><b><span style="color:var(--accent)">[01]</span> OVERVIEW</b>
+<span style="color:var(--muted)">──────────────────</span>
+I founded Elevated Candles as both a product business and a live analytical environment — applying operational analytics to real commercial activity across product development, fulfillment, and marketing. Multi-channel operations span farmers' markets, wholesale, and e-commerce from 2016 to 2020.
+
+
+<b><span style="color:var(--accent)">[02]</span> SYSTEM / PROCESS</b>
+<span style="color:var(--muted)">──────────────────</span>
+&gt;&gt; Built full unit economics model at SKU level
+-- tracked wax, oil, labor, packaging, and shipping per unit
+-- calculated retail margins (62–76%) and wholesale margins (21–51%) across product lines
+
+&gt;&gt; Designed multi-brand architecture
+-- Elevated Candles: primary brand built around wine bottle recycling system; distinctive container identity sourced from local restaurants
+-- Soy Republic: secondary brand launched to hedge supply chain constraints and test wholesale price points without bottle dependency
+
+&gt;&gt; Built operational and financial tracking infrastructure
+-- multi-channel sales tracking: farmers market, website, wholesale (Faire), and events
+-- year-over-year P&amp;L summaries with category-level expense breakdown across materials, operations, promotions, and equipment
+
+&gt;&gt; Designed class and workshop infrastructure
+-- developed candle-making class system for live instruction and product demos
+-- constrained by portable equipment logistics without a fixed retail location; highly successful when deployed
+
+&gt;&gt; Managed wholesale distribution via Faire platform
+-- Soy Republic Cocktail Classics line: 16-item collection
+-- built product photography, collection structure, and platform listings independently
+
+
+<b><span style="color:var(--accent)">[03]</span> OUTPUT / IMPACT</b>
+<span style="color:var(--muted)">──────────────────</span>
+&gt;&gt; Established data workflows applicable to small business operations
+&gt;&gt; Created cost-per-unit and margin visibility across product lines
+&gt;&gt; Balanced hands-on product work with structured analytical systems
+&gt;&gt; Two independent brands with distinct supply chain logic and market positioning
+&gt;&gt; Repeatable unit economics framework applicable to any physical product operation</div>
+        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;" onclick="event.stopPropagation()"><a href="https://www.instagram.com/elevatedcandles/" target="_blank" class="btn">ELEVATED INSTAGRAM</a><a href="https://www.instagram.com/soy_republic/" target="_blank" class="btn">SOY REPUBLIC INSTAGRAM</a><a href="https://www.youtube.com/@Elevatedcandles/videos" target="_blank" class="btn">ELEVATED YOUTUBE</a></div>
+        <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="event.stopPropagation(); closeModal()" fdprocessedid="8ei42j">Close_Terminal</button>
     </div>
 </div>
 
@@ -79,64 +268,133 @@
     <header>
         <div class="tagline">ARCHIVE_SYSTEM // TERMINAL_INTERFACE</div>
         <h1>John Hall</h1>
-        <p style="font-family: var(--mono); color: var(--muted);">SR_ANALYST // AI_ML_ARCHITECTURE</p>
+        <p style="font-family:var(--mono); color:var(--muted);">SR_ANALYST // AI_ML_ARCHITECTURE</p>
     </header>
 
     <div class="nav-zone">
-        <div class="filter-list" id="filter-bar"><button class="filter-btn active" onclick="setParent('ALL')">ALL</button><button class="filter-btn " onclick="setParent('CAREER')">CAREER</button><button class="filter-btn " onclick="setParent('CREATIVE')">CREATIVE</button><button class="filter-btn " onclick="setParent('RESEARCH')">RESEARCH</button></div>
-        <div class="sub-nav" id="sub-filter-bar" style="display: none;"></div>
+        <div class="filter-list" id="filter-bar"><button class="filter-btn active" onclick="setParent('ALL')">ALL</button><button class="filter-btn " onclick="setParent('CAREER')">CAREER</button><button class="filter-btn " onclick="setParent('RESEARCH')">RESEARCH</button><button class="filter-btn " onclick="setParent('CREATIVE')">CREATIVE</button></div>
+        <div class="sub-nav" id="sub-filter-bar" style="display: none;"><button class="sub-btn active" onclick="setChild('ALL')">[ ALL ]</button><button class="sub-btn " onclick="setChild('ANALYTICS')">[ ANALYTICS ]</button><button class="sub-btn " onclick="setChild('CODE')">[ CODE ]</button><button class="sub-btn " onclick="setChild('OPERATIONS')">[ OPERATIONS ]</button></div>
     </div>
 
-    <div id="admin-panel" class="admin-bar" style="display: none;">
+    <div id="admin-panel" class="admin-bar" style="display: none;"><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" class="dnXmp" style="position: absolute; top: -1.11111px; left: -1.11111px; pointer-events: none; --rem: 16;"></grammarly-extension>
+        <!-- Structure_Manager -->
         <div class="admin-section">
             <div class="tagline" style="margin-bottom:10px;">Structure_Manager</div>
-            <div id="cat-chips" style="margin-bottom:15px; display:flex; flex-wrap:wrap; gap:5px;"><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">CAREER:ANALYTICS <button onclick="removeStructure('CAREER:ANALYTICS')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">CAREER:CODE <button onclick="removeStructure('CAREER:CODE')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">CREATIVE:VIDEO <button onclick="removeStructure('CREATIVE:VIDEO')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">RESEARCH <button onclick="removeStructure('RESEARCH')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span></div>
+            <div id="cat-chips" style="margin-bottom:15px; display:flex; flex-wrap:wrap; gap:5px;"><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">CAREER:ANALYTICS <button onclick="removeStructure('CAREER:ANALYTICS')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">CAREER:CODE <button onclick="removeStructure('CAREER:CODE')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span><span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">RESEARCH <button onclick="removeStructure('RESEARCH')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span></div>
             <div style="display:flex; gap:10px;">
-                <input type="text" id="new-cat" placeholder="E.G. CAREER:ANALYTICS" style="margin:0;">
-                <button class="btn" onclick="addStructure()">Add_Node</button>
+                <input type="text" id="new-cat" placeholder="E.G. CAREER:ANALYTICS" style="margin:0;" fdprocessedid="lep067">
+                <button class="btn" onclick="addStructure()" fdprocessedid="pv3gul">Add_Node</button>
             </div>
         </div>
+        <!-- Entry_Editor -->
         <div class="admin-section">
             <div class="tagline" style="margin-bottom:10px;">Entry_Editor</div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-                <input type="text" id="p-title" placeholder="PROJECT_NAME">
-                <input type="text" id="p-category" placeholder="DOMAIN (PARENT:CHILD)">
+                <input type="text" id="p-title" placeholder="PROJECT_NAME" fdprocessedid="zmly3">
+                <input type="text" id="p-category" placeholder="DOMAIN (PARENT:CHILD)" fdprocessedid="dt3f3">
             </div>
-            <input type="text" id="p-img" placeholder="IMAGE_URLS (Comma separated)">
-            <input type="text" id="p-links" placeholder="LABEL:URL, LABEL:URL">
-            <textarea id="p-desc" rows="2" placeholder="SHORT_SUMMARY"></textarea>
-            <textarea id="p-detail" rows="4" placeholder="FULL_LOG (HTML OK)"></textarea>
+            <input type="text" id="p-img" placeholder="IMAGE_URLS (Comma separated)" oninput="updateFocalPicker()" fdprocessedid="mvb9h">
+			<input type="text" id="p-imgpos" placeholder="IMAGE FOCAL POINT — or click preview below" oninput="updateFocalDot()" fdprocessedid="5nu7iv">
+			<div id="focal-picker" onclick="setFocalPoint(event)" style="display: none;">
+				<img id="focal-img" src="images/elevated-logo.webp">
+				<div id="focal-dot" style="left: 49%; top: 45%;"></div>
+				<div id="focal-label">CLICK TO SET FOCAL POINT</div>
+			</div>
+			<input type="text" id="p-imgfit" placeholder="MODAL IMAGE FIT: contain (default) | cover | fill — optional" fdprocessedid="mpn8tn">
+            <input type="text" id="p-links" placeholder="LABEL:URL, LABEL:URL" fdprocessedid="pz6nof">
+            <textarea id="p-desc" rows="2" placeholder="SHORT_SUMMARY" spellcheck="false"></textarea>
+            <textarea id="p-detail" placeholder="FULL_LOG (HTML OK)" spellcheck="false"></textarea>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button class="btn" onclick="saveProject()" id="save-btn">Sync_Entry</button>
-                <button class="btn" onclick="exportFinalHTML()">Download_Archive</button>
-                <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display: none;">Abort</button>
-                <button class="btn btn-danger" onclick="lockAdmin()" style="margin-left:auto;">Lock_Terminal</button>
+                <button class="btn" onclick="saveProject()" id="save-btn" fdprocessedid="fsxlsp">Sync_Entry</button>
+                <button class="btn btn-danger" onclick="cancelEdit()" id="cancel-btn" style="display: none;" fdprocessedid="8shdk">Abort</button>
+                <button class="btn" onclick="exportFinalHTML()" style="margin-left:auto;" fdprocessedid="rl1r3">Download_Archive</button>
+                <button class="btn btn-danger" onclick="lockAdmin()" fdprocessedid="mz2jc">Lock_Terminal</button>
             </div>
         </div>
-    </div>
+    <grammarly-extension-vbars data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></grammarly-extension-vbars><superhuman-go-underlines data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></superhuman-go-underlines><grammarly-extension-vbars data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></grammarly-extension-vbars><superhuman-go-underlines data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></superhuman-go-underlines><grammarly-extension-vbars data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></grammarly-extension-vbars><superhuman-go-underlines data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></superhuman-go-underlines><grammarly-extension-vbars data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></grammarly-extension-vbars><superhuman-go-underlines data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></superhuman-go-underlines><grammarly-extension-vbars data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></grammarly-extension-vbars><superhuman-go-underlines data-grammarly-shadow-root="true" class="dnXmp" style="display: contents; --rem: 16;"></superhuman-go-underlines></div>
 
     <div class="grid" id="project-grid">
-            <div class="card">
-                <img src="fall fantasy.png" class="card-img">
+            <div class="card" onclick="openModal(1)" style="cursor:pointer;">
+                <img src="images/elevated-logo.webp" class="card-img" width="640" loading="lazy" alt="ELEVATED CANDLES | SOY REPUBLIC" style="object-position: 49% 45%">
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CAREER &gt; OPERATIONS</div>
-                <div class="card-title">ELEVATED CANDLES</div>
-                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">Founder &amp; Data Lead.</p>
-                <button class="btn" style="margin-top:15px;" onclick="openModal(1)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+                <div class="card-title">ELEVATED CANDLES | SOY REPUBLIC</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I founded and scaled a product-based business while building supporting data systems for operations, tracking, and performance.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(1)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
                 <div class="admin-actions">
-					<button class="btn" onclick="startEdit(1)">Edit</button>
-					<button class="btn btn-danger" onclick="deleteProject(1)">Del</button>
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(1)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(1)">Del</button>
                 </div>
             </div>
         
-            <div class="card">
-                <img src="y_files - logo.png" class="card-img">
-                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CREATIVE &gt; DOCUMENTARY</div>
-                <div class="card-title">THE Y FILES</div>
-                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">A documentary exploration of data and storytelling.</p>
-                <button class="btn" style="margin-top:15px;" onclick="openModal(2)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+            <div class="card" onclick="openModal(2)" style="cursor:pointer;">
+                <img src="images/yfiles.webp" class="card-img" width="640" loading="lazy" alt="THE Y FILES | AUDIO SERIES" style="object-position: 51% 40%">
+                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CREATIVE &gt; AI</div>
+                <div class="card-title">THE Y FILES | AUDIO SERIES</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I created a serialized audio project using AI voice synthesis to apply forensic storytelling to everyday situations.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(2)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
                 <div class="admin-actions">
-					<button class="btn" onclick="startEdit(2)">Edit</button>
-					<button class="btn btn-danger" onclick="deleteProject(2)">Del</button>
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(2)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(2)">Del</button>
+                </div>
+            </div>
+        
+            <div class="card" onclick="openModal(1775869089791)" style="cursor:pointer;">
+                <img src="images/otc-interface.webp" class="card-img" width="640" loading="lazy" alt="OKLAHOMA TAX COMMISSION | Custom Tax Form Management System" style="object-position: 50% 11%">
+                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CAREER &gt; CODE</div>
+                <div class="card-title">OKLAHOMA TAX COMMISSION | Custom Tax Form Management System</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I built a full-stack database system to replace manual Excel tracking, automating tax form lifecycle management and data integrity.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(1775869089791)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(1775869089791)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(1775869089791)">Del</button>
+                </div>
+            </div>
+        
+            <div class="card" onclick="openModal(1775961473205)" style="cursor:pointer;">
+                <img src="images/JL_infographic.webp" class="card-img" width="640" loading="lazy" alt="JusticeLink | Data Infrastructure &amp; Impact Analytics" style="object-position: 50% 5%">
+                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CAREER &gt; ANALYTICS</div>
+                <div class="card-title">JusticeLink | Data Infrastructure &amp; Impact Analytics</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I architected a relational data model to replace reporting limitations in Salesforce, enabling scalable analytics and outcome tracking.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(1775961473205)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(1775961473205)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(1775961473205)">Del</button>
+                </div>
+            </div>
+        
+            <div class="card" onclick="openModal(1776291869506)" style="cursor:pointer;">
+                <img src="images/eldra-logos.webp" class="card-img" width="640" loading="lazy" alt="ELDRA | CCG" style="object-position: center">
+                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CREATIVE &gt; GAMEDEV</div>
+                <div class="card-title">ELDRA | CCG</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I design a strategy card game system combining resource mechanics, faction identity, and world-driven gameplay.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(1776291869506)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(1776291869506)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(1776291869506)">Del</button>
+                </div>
+            </div>
+        
+            <div class="card" onclick="openModal(1776292166423)" style="cursor:pointer;">
+                <img src="images/photon-logo.webp" class="card-img" width="640" loading="lazy" alt="PHOTON | SUBATOMIC NIGHTS | SONORA" style="object-position: center">
+                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CREATIVE &gt; MUSIC</div>
+                <div class="card-title">PHOTON | SUBATOMIC NIGHTS | SONORA</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I produce and curate electronic music mixes focused on atmosphere, flow, and global sound discovery.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(1776292166423)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(1776292166423)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(1776292166423)">Del</button>
+                </div>
+            </div>
+        
+            <div class="card" onclick="openModal(1776474085241)" style="cursor:pointer;">
+                <img src="images/catalyst-logo-2.webp" class="card-img" width="640" loading="lazy" alt="CATALYST | 7-DTD MOD | BRANDING" style="object-position: 50% 49%">
+                <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// CREATIVE &gt; GAMEDEV</div>
+                <div class="card-title">CATALYST | 7-DTD MOD | BRANDING</div>
+                <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">I developed advanced gameplay mods and a full visual identity system, extending mechanics, assets, and player experience beyond the base game.</p>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(1776474085241)">Open_Log <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg></button>
+                <div class="admin-actions">
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(1776474085241)">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(1776474085241)">Del</button>
                 </div>
             </div>
         </div>
@@ -145,20 +403,20 @@
 <div class="login-trigger" onclick="unlockAdmin()">[SYSTEM_KEY]</div>
 
 <script>
-    let projects = [{"id":1,"title":"ELEVATED CANDLES","category":"CAREER:OPERATIONS","desc":"Founder & Data Lead.","detail":"<b>Technical Breakdown:</b>\nSQL Server optimization and KPI dashboards.","img":"fall fantasy.png","links":"Instagram: https://www.instagram.com/elevatedcandles/"},{"id":2,"title":"THE Y FILES","category":"CREATIVE:DOCUMENTARY","desc":"A documentary exploration of data and storytelling.","detail":"Log entries covering various episodes and data narratives.","img":"y_files - logo.png","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"}];
-    let structure = ["CAREER:ANALYTICS","CAREER:CODE","CREATIVE:VIDEO","RESEARCH"];
-    
+    let projects = [{"id":1,"title":"ELEVATED CANDLES | SOY REPUBLIC","category":"CAREER:OPERATIONS","desc":"I founded and scaled a product-based business while building supporting data systems for operations, tracking, and performance.","detail":"<b><span style=\"color:var(--accent)\">[01]</span> OVERVIEW</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\nI founded Elevated Candles as both a product business and a live analytical environment — applying operational analytics to real commercial activity across product development, fulfillment, and marketing. Multi-channel operations span farmers' markets, wholesale, and e-commerce from 2016 to 2020.\n\n\n<b><span style=\"color:var(--accent)\">[02]</span> SYSTEM / PROCESS</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Built full unit economics model at SKU level\n-- tracked wax, oil, labor, packaging, and shipping per unit\n-- calculated retail margins (62–76%) and wholesale margins (21–51%) across product lines\n\n>> Designed multi-brand architecture\n-- Elevated Candles: primary brand built around wine bottle recycling system; distinctive container identity sourced from local restaurants\n-- Soy Republic: secondary brand launched to hedge supply chain constraints and test wholesale price points without bottle dependency\n\n>> Built operational and financial tracking infrastructure\n-- multi-channel sales tracking: farmers market, website, wholesale (Faire), and events\n-- year-over-year P&L summaries with category-level expense breakdown across materials, operations, promotions, and equipment\n\n>> Designed class and workshop infrastructure\n-- developed candle-making class system for live instruction and product demos\n-- constrained by portable equipment logistics without a fixed retail location; highly successful when deployed\n\n>> Managed wholesale distribution via Faire platform\n-- Soy Republic Cocktail Classics line: 16-item collection\n-- built product photography, collection structure, and platform listings independently\n\n\n<b><span style=\"color:var(--accent)\">[03]</span> OUTPUT / IMPACT</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Established data workflows applicable to small business operations\n>> Created cost-per-unit and margin visibility across product lines\n>> Balanced hands-on product work with structured analytical systems\n>> Two independent brands with distinct supply chain logic and market positioning\n>> Repeatable unit economics framework applicable to any physical product operation","img":"images/elevated-logo.webp, images/elevated-white.webp, images/elevated-amber.webp, images/candles-faire.webp, images/candle-classes.webp, images/bison-candles.webp, images/fragrance-finder.webp","imgPos":"49% 45%","imgFit":"cover","links":"ELEVATED INSTAGRAM: https://www.instagram.com/elevatedcandles/, SOY REPUBLIC INSTAGRAM: https://www.instagram.com/soy_republic/, ELEVATED YOUTUBE: https://www.youtube.com/@Elevatedcandles/videos"},{"id":2,"title":"THE Y FILES | AUDIO SERIES","category":"CREATIVE:AI","desc":"I created a serialized audio project using AI voice synthesis to apply forensic storytelling to everyday situations.","detail":"<H3>Concept & Creative Direction</H3>\nThe Y Files is a short-form audio series that parodies true-crime documentaries by applying forensic investigative storytelling to trivial domestic events. Each episode presents a self-contained \"case,\" using a deadpan, documentary-style narration to examine everyday social violations with exaggerated analytical rigor. The project explores the contrast between serious investigative tone and insignificant subject matter. Episodes follow a consistent structure:\n\nOminous, controlled setup\nEvidence-driven forensic analysis\nAbsurd but inevitable conclusion\nDeadpan closing statement\n\nThe writing emphasizes:\n\nBehavioral analysis framed as forensic evidence\nClear violations and accountability\nClinical, objective tone without comedic delivery cues\n\nExample cases include missing food, thermostat changes, and interrupted television viewing, all treated with the gravity of formal investigations .\n\n<hr>\n<h3>Audio & Voice Design</h3>\nThe narration is produced using AI voice synthesis, designed to replicate the cadence, pacing, and tonal characteristics of classic true-crime documentary narrators.\n\nKey considerations:\n\nControlled pacing and intentional pauses to create tension\nLow-dynamic delivery to maintain a documentary feel\nSubtle background scoring to support, not overpower, narration\nSilence used as a structural tool for emphasis\n\nThe result is an audio experience that feels authentic to the genre while delivering contrast-driven humor.\n\n<hr>\n<h3>Technical Implementation</h3>\nScriptwriting and narrative structure designed for 60–90 second formats\nVoice generated using AI text-to-speech / voice cloning tools\nAudio post-processing includes:\nTiming refinement\nBackground music layering\nLevel balancing and clarity optimization\nFinal output formatted for social media distribution (Reels, Shorts, etc.) using static or minimal visual assets\n\n<hr>\n<h3>Branding & Presentation</h3>\n\nThe project is presented as a serialized collection of \"case files,\" supported by:\n\nMinimal, modern visual identity (logo + banner)\nConsistent episode titling (e.g., Crumbs of Evidence, Degrees of Deception)\nStandalone episodes that build a cohesive series over time\n\n<hr>\n<h3>Outcome & Purpose</h3>\n\nThis project demonstrates:\n\nAbility to blend creative writing with structured narrative systems\nUse of AI tools for voice synthesis and content production\nUnderstanding of tone, pacing, and audience perception in audio media\nDevelopment of a scalable, repeatable content format","img":"images/yfiles.webp","imgPos":"51% 40%","imgFit":"cover","links":"EP1: https://www.facebook.com/share/v/1CMZ5irfWt/, EP2: https://www.facebook.com/share/v/1DrBcmPFzN/,EP3: https://www.facebook.com/share/v/1KMs9my3ps/"},{"id":1775869089791,"title":"OKLAHOMA TAX COMMISSION | Custom Tax Form Management System","category":"CAREER:CODE","desc":"I built a full-stack database system to replace manual Excel tracking, automating tax form lifecycle management and data integrity.","detail":"I served as the sole developer for this two-year project, taking a government agency from manual Excel tracking to a fully automated database solution. The application manages the lifecycle of tax forms received from various state vendors, ensuring version control and data integrity.\n\n• <strong>Advanced Automation:</strong> Built a scanning module that interfaces with handheld scanners to read QR/2D barcodes, automatically loading the corresponding PDF page and linking data to the database.\n\n• <strong>Robust Backend:</strong> Designed a relational schema to handle complex many-to-many relationships between vendors, forms, and administrative reviews.\n\n• <strong>Full-Stack UI:</strong> Created a custom GUI (1,000+ lines of VBA) featuring a \"Clipboard\" system for batch reporting, dynamic search filters, and automated status color-coding.\n\n• <strong>Communication Layer:</strong> Integrated MS Outlook automation to send real-time notifications to users regarding pending reviews and due dates.","img":"images/otc-interface.webp, images/otc-relations.webp, images/otc-tables.webp","imgPos":"50% 11%","imgFit":"cover","links":""},{"id":1775961473205,"title":"JusticeLink | Data Infrastructure & Impact Analytics","category":"CAREER:ANALYTICS","desc":"I architected a relational data model to replace reporting limitations in Salesforce, enabling scalable analytics and outcome tracking.","detail":"Architected a comprehensive relational data model and infrastructure plan to transition a community-focused organization from UI-centric Salesforce constraints to a robust, report-ready relational database.\nIdentified and diagnosed critical reporting limitations within a Salesforce environment that prioritized user interface design over business-critical data relationships. Conducted extensive research into normalization principles to propose a new relational data structure, aimed at eliminating manual workarounds and enhancing system scalability.\n<div style=\"color:var(--border); font-family:var(--mono); margin: 1px 0;\">--------------------------------------------------------------------------------------------------------</div><h2 style=\"color:cyan; margin:0px; margin-bottom: 8px;\">Key Technical Achievements</h2><b>• Relational Data Modeling:</b> Architected a data model identifying key entities and attributes to directly improve the accuracy of queries and reports.\n\n<b>• Normalization Strategy:</b> Implemented normalization principles to create independent objects for individual business concepts, enhancing system scalability and flexibility.\n\n<b>• Outcome Tracking & Reporting:</b> Designed specialized schemas to track completed client goals and service plan timelines, providing a solution for reporting long-term service impacts.\n\n<b>• Comprehensive System Mapping:</b> Produced a high-level ERD detailing complex relationships between staff, court proceedings (motions, warrants, outcomes), and client services.","img":"images/JL_infographic.webp, images/jl-clients_by_income.webp, images/jl-erd.webp","imgPos":"50% 5%","imgFit":"cover","links":""},{"id":1776291869506,"title":"ELDRA | CCG","category":"CREATIVE:GAMEDEV","desc":"I design a strategy card game system combining resource mechanics, faction identity, and world-driven gameplay.","detail":"<b><span style=\"color:var(--accent)\">[01]</span> OVERVIEW</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\nEldra is a 3-round competitive CCG inspired by Gwent's structural framework but built on a different foundation: science concepts become mechanics, not flavor. Set in 2525 following The Fracture — a reality collapse caused by misuse of ancient artifacts called Codices — five factions embody distinct physics disciplines, cultural philosophies, and strategic identities. AGI fragmentation is a central narrative force.\n\n<b><span style=\"color:var(--accent)\">[02]</span> SYSTEM / PROCESS</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Designed core game architecture\n-- 3-round match structure; round control is the primary strategic axis\n-- no combat system — all interaction through abilities, statuses, and timing\n-- 150 Shard Point deckbuilding cost system (equivalent to Gwent provisions)\n\n>> Built five fully differentiated factions\n-- Tempestarii (Water / Meteorology): control, adaptation, weather effects, go-wide\n-- Kamisora (Ether / General Relativity): knowledge engines, entanglement, phasing, long round\n-- Medjai (Wind / Ionization): aggression, target marking, ionic discharge, short round\n-- Ōmgard (Earth / Seismology): defense, tall units, structural resonance, long round\n-- Forgeborn (Fire / Thermodynamics): modular construction, thermal cores, overclocking\n\n>> Developed faction-specific resource systems\n-- not generic mana — each resource tied to a real physics concept\n-- Thermal Cores, Knowledge Pool, Ionic States, Aqueous/Mineral Charges\n\n>> Created card balance framework (EV Formula)\n-- Effective Value = (Base HP + Setup Modifier) + (Versatility + Synergy) × Round Multiplier × Card Type Modifier\n-- Acceptable EV range: 24–40\n\n>> Integrated science as structural game logic\n-- Ionization → status → amplified damage from specific abilities\n-- Wave/Particle duality → range vs. power ability tradeoff\n-- Quantum Entanglement → shared effects between linked units\n-- Piezoelectricity → energy generation from structural pressure\n\n>> Designed faction counterplay matrix\n-- deliberate rock-paper-scissors dynamic: Tempestarii > Ōmgard > Kamisora > Medjai > Forgeborn > Tempestarii\n\n<b><span style=\"color:var(--accent)\">[03]</span> OUTPUT / IMPACT</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Five fully documented factions with science themes, cultural inspirations, unique statuses, and playstyle identities\n>> Functional card balance formula with defined acceptable range and card type modifiers\n>> Comprehensive design handoff covering mechanics, lore, balance theory, and open design problems\n>> Scalable design space: new physics concepts = new mechanics with no ceiling on expansion\n\n<b><span style=\"color:var(--accent)\">[04]</span> STATUS</b>\nIn Development","img":"images/eldra-logos.webp","imgPos":"","imgFit":"cover","links":""},{"id":1776292166423,"title":"PHOTON | SUBATOMIC NIGHTS | SONORA","category":"CREATIVE:MUSIC","desc":"I produce and curate electronic music mixes focused on atmosphere, flow, and global sound discovery.","detail":"<b><span style=\"color:var(--accent)\">[01]</span> OVERVIEW</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\nFifteen years of continuous DJ and production work across three aliases — Photon, Subatomic Nights, and Sonora — spanning curated long-form mixes, original electronic compositions, and music video production. Each alias represents a distinct sonic range and creative direction within a broader atmospheric identity.\n\n<b><span style=\"color:var(--accent)\">[02]</span> SYSTEM / PROCESS</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Built and maintained a deep curated library\n-- emphasis on European influences, underground electronic, and global discovery\n-- ongoing curation across genres with consistent atmospheric focus\n\n>> Produced original music and DJ mix sets\n-- SoundCloud productions and long-form mix series\n-- music video production extending work into visual storytelling\n\n>> Developed three distinct alias identities\n-- each alias serves a different sonic range and audience context\n-- unified by a common atmospheric and structural sensibility\n\n>> Distributed across digital platforms\n-- SoundCloud, Instagram, and social channels under Subatomik handle\n\n<b><span style=\"color:var(--accent)\">[03]</span> OUTPUT / IMPACT</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> 15+ years of continuous production and curation\n>> Multiple alias identities with distinct sonic character and platform presence\n>> Music video production demonstrating cross-medium creative execution\n\n<b><span style=\"color:var(--accent)\">[04]</span> STATUS</b>\nOngoing","img":"images/photon-logo.webp, images/subatomic_nights-logo.webp, images/sonora-logo.webp","imgPos":"","imgFit":"cover","links":"LINKS: linktr.ee/subatomik"},{"id":1776474085241,"title":"CATALYST | 7-DTD MOD | BRANDING","category":"CREATIVE:GAMEDEV","desc":"I developed advanced gameplay mods and a full visual identity system, extending mechanics, assets, and player experience beyond the base game.","detail":"<b><span style=\"color:var(--accent)\">[01]</span> OVERVIEW</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\nCatalyst is a comprehensive modding and design project focused on extending gameplay systems, introducing new mechanics, and creating a cohesive visual and brand identity.\n\n<b><span style=\"color:var(--accent)\">[02]</span> SYSTEM / PROCESS</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Designed and implemented custom gameplay and progression systems\n-- new weapons, ammo types, and modified entity behaviors\n\n>> Created original mechanics not present in base game\n-- extended functionality (e.g., enhanced throwable systems, enemy variation)\n\n>> Developed visual identity system\n-- custom fonts, UI elements, and branding assets\n\n>> Produced multi-resolution design assets\n-- wallpapers, graphics, and thematic consistency across formats\n\n>> Iterated through testing and balancing\n-- refined gameplay experience and progression\n\n<b><span style=\"color:var(--accent)\">[03]</span> OUTPUT / IMPACT</b>\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Expanded gameplay beyond original design limitations\n>> Demonstrated ability to modify and extend existing systems\n>> Combined technical development with full creative direction\n\n<b><span style=\"color:var(--accent)\">[04]</span> TECHNICAL DEPTH\n<span style=\"color:var(--muted)\">──────────────────</span>\n>> Custom asset creation\n-- fonts, textures, UI overlays, wallpapers, themed visuals\n\n>> Systems modification\n-- entity behavior, item definitions, progression tuning\n\n>> Reverse-engineering / adaptation\n-- worked within engine constraints to introduce new mechanics\n\n>> Cross-discipline integration\n-- code + design + user experience","img":"images/catalyst-logo-2.webp, images/catalyst-font.webp, images/catalyst-server-desc.webp, images/catalyst-wallpapers.webp","imgPos":"50% 49%","imgFit":"cover","links":""}];
+    let structure = ["CAREER:ANALYTICS","CAREER:CODE","RESEARCH"];
+
     let currentParent = 'ALL';
     let currentChild = 'ALL';
     let editingId = null;
 
     function render() {
         const parents = ['ALL', ...new Set([
-            ...structure.map(s => s.split(':')[0]), 
+            ...structure.map(s => s.split(':')[0]),
             ...projects.map(p => p.category.split(':')[0])
         ])].filter(Boolean);
-        
-        document.getElementById('filter-bar').innerHTML = parents.map(p => 
+
+        document.getElementById('filter-bar').innerHTML = parents.map(p =>
             `<button class="filter-btn ${currentParent === p ? 'active' : ''}" onclick="setParent('${p}')">${p}</button>`
         ).join('');
 
@@ -168,16 +426,15 @@
                 ...structure.filter(s => s.startsWith(currentParent + ':')).map(s => s.split(':')[1]),
                 ...projects.filter(p => p.category.startsWith(currentParent + ':')).map(p => p.category.split(':')[1])
             ].filter(Boolean))];
-            
             if (children.length > 1) {
                 subNav.style.display = 'flex';
-                subNav.innerHTML = children.map(c => 
+                subNav.innerHTML = children.map(c =>
                     `<button class="sub-btn ${currentChild === c ? 'active' : ''}" onclick="setChild('${c}')">[ ${c} ]</button>`
                 ).join('');
             } else { subNav.style.display = 'none'; }
         } else { subNav.style.display = 'none'; }
 
-        document.getElementById('cat-chips').innerHTML = structure.map(s => 
+        document.getElementById('cat-chips').innerHTML = structure.map(s =>
             `<span style="background:#000; border:1px solid var(--border); padding:4px 8px; font-size:10px; font-family:var(--mono);">${s} <button onclick="removeStructure('${s}')" style="background:none; border:none; color:var(--danger); cursor:pointer;">×</button></span>`
         ).join('');
 
@@ -189,15 +446,15 @@
         });
 
         document.getElementById('project-grid').innerHTML = filtered.map(p => `
-            <div class="card">
-                ${p.img ? `<img src="${p.img.split(',')[0]}" class="card-img">` : ''}
+            <div class="card" onclick="openModal(${p.id})" style="cursor:pointer;">
+                ${p.img ? `<img src="${p.img.split(',')[0].trim()}" class="card-img" width="640" loading="lazy" alt="${p.title}" style="object-position: ${p.imgPos || 'center'}">` : ''}
                 <div class="tagline" style="font-size:10px; color:var(--accent); margin-bottom:5px;">// ${p.category.replace(':', ' > ')}</div>
                 <div class="card-title">${p.title}</div>
                 <p style="font-family:var(--mono); color:var(--muted); font-size:12px; flex-grow:1;">${p.desc}</p>
-                <button class="btn" style="margin-top:15px;" onclick="openModal(${p.id})">Open_Log <i data-lucide="chevron-right"></i></button>
+                <button class="btn" style="margin-top:15px;" onclick="event.stopPropagation(); openModal(${p.id})">Open_Log <i data-lucide="chevron-right"></i></button>
                 <div class="admin-actions">
-					<button class="btn" onclick="startEdit(${p.id})">Edit</button>
-					<button class="btn btn-danger" onclick="deleteProject(${p.id})">Del</button>
+                    <button class="btn" onclick="event.stopPropagation(); startEdit(${p.id})">Edit</button>
+                    <button class="btn btn-danger" onclick="event.stopPropagation(); deleteProject(${p.id})">Del</button>
                 </div>
             </div>
         `).join('');
@@ -218,7 +475,14 @@
         document.getElementById('modal-title').innerText = p.title;
         document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
         document.getElementById('modal-body').innerHTML = p.detail || p.desc;
-        document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src => `<img src="${src.trim()}" style="width:100%; max-height:420px; object-fit:contain; border:1px solid var(--border);">`).join('') : '';
+		document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src =>
+			`<div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('${src.trim()}')">
+				<img src="${src.trim()}" class="gallery-preview" loading="lazy" alt="" style="object-fit: ${p.imgFit || 'contain'}; object-position: ${p.imgPos || 'center'};">
+				<div class="zoom-overlay">
+					<i data-lucide="maximize-2"></i>
+				</div>
+			</div>`
+		).join('') : '';
         document.getElementById('modal-links').innerHTML = p.links ? p.links.split(',').map(l => {
             const parts = l.split(':');
             const label = parts.shift().trim();
@@ -230,25 +494,54 @@
         lucide.createIcons();
     }
 
-    function closeModal() { document.getElementById('detail-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeModal() {
+        document.getElementById('detail-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+	
+	function zoomImage(src) {
+		const lightbox = document.createElement('div');
+		lightbox.id = 'lightbox';
+		
+		// Inline styles for the lightbox
+		lightbox.style = `
+			position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+			background: rgba(3, 5, 8, 0.98); display: flex; align-items: center;
+			justify-content: center; z-index: 3000; cursor: zoom-out;
+			backdrop-filter: blur(15px);
+		`;
+		
+		lightbox.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; object-fit: contain; border: 1px solid var(--accent); shadow: 0 0 30px #000;">`;
+		
+		// Use stopPropagation here so clicking the zoom doesn't trigger the modal's closeModal
+		lightbox.onclick = (e) => {
+			e.stopPropagation();
+			lightbox.remove();
+		};
+		
+		document.body.appendChild(lightbox);
+	}
 
     function saveProject() {
-        const p = {
-            id: editingId || Date.now(),
-            title: document.getElementById('p-title').value,
-            category: document.getElementById('p-category').value.toUpperCase().trim(),
-            desc: document.getElementById('p-desc').value,
-            detail: document.getElementById('p-detail').value,
-            img: document.getElementById('p-img').value,
-            links: document.getElementById('p-links').value
-        };
-        if(editingId) projects = projects.map(x => x.id === editingId ? p : x);
-        else projects.push(p);
-        cancelEdit(); render();
-    }
+		const p = {
+			id: editingId || Date.now(),
+			title: document.getElementById('p-title').value,
+			category: document.getElementById('p-category').value.toUpperCase().trim(),
+			desc: document.getElementById('p-desc').value,
+			detail: document.getElementById('p-detail').value,
+			img: document.getElementById('p-img').value,
+			imgPos: document.getElementById('p-imgpos').value.trim(),
+			imgFit: document.getElementById('p-imgfit').value.trim(),
+			links: document.getElementById('p-links').value
+		};
+		if(editingId) projects = projects.map(x => x.id === editingId ? p : x);
+		else projects.push(p);
+		cancelEdit(); render();
+	}
 
     function startEdit(id) {
         editingId = id; const p = projects.find(x => x.id === id);
+		document.getElementById('p-imgpos').value = p.imgPos || '';
         document.getElementById('p-title').value = p.title;
         document.getElementById('p-category').value = p.category;
         document.getElementById('p-desc').value = p.desc;
@@ -257,31 +550,78 @@
         document.getElementById('p-links').value = p.links || '';
         document.getElementById('save-btn').innerText = "Update_Entry";
         document.getElementById('cancel-btn').style.display = "inline-flex";
+		document.getElementById('p-imgfit').value = p.imgFit || '';
         window.scrollTo({top: 0, behavior: 'smooth'});
+		updateFocalPicker();
     }
 
     function cancelEdit() {
         editingId = null;
-        ['p-title','p-category','p-desc','p-detail','p-img','p-links'].forEach(id => document.getElementById(id).value = '');
+        ['p-title','p-category','p-desc','p-detail','p-img','p-imgpos','p-imgfit','p-links'].forEach(id => document.getElementById(id).value = '');
         document.getElementById('save-btn').innerText = "Sync_Entry";
         document.getElementById('cancel-btn').style.display = "none";
+		document.getElementById('focal-picker').style.display = 'none';
     }
 
     function deleteProject(id) { if(confirm("WIPE ENTRY?")) { projects = projects.filter(p => p.id !== id); render(); } }
     function unlockAdmin() { if(prompt("PASSCODE:") === "5236") { document.body.classList.add('edit-mode'); document.getElementById('admin-panel').style.display='block'; } }
     function lockAdmin() { document.getElementById('admin-panel').style.display='none'; document.body.classList.remove('edit-mode'); }
 
-    function exportFinalHTML() {
-        const projData = `let projects = ${JSON.stringify(projects)};`;
-        const structData = `let structure = ${JSON.stringify(structure)};`;
-        let html = document.documentElement.outerHTML;
-        html = html.replace(/let projects = \[.*?\];/s, projData);
-        html = html.replace(/let structure = \[.*?\];/s, structData);
-        html = html.replace('display: block;', 'display: none;'); 
-        html = html.replace('class="edit-mode"', '');
-        const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
-        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
-    }
-    render();
+	function exportFinalHTML() {
+		const projData = `let projects = ${JSON.stringify(projects)};`;
+		const structData = `let structure = ${JSON.stringify(structure)};`;
+		let html = document.documentElement.outerHTML;
+		html = html.replace(/let projects = \[.*?\];/s, projData);
+		html = html.replace(/let structure = \[.*?\];/s, structData);
+		html = html.replace('display: block;', 'display: none;');
+		html = html.replace('class="edit-mode"', '');
+		const blob = new Blob(["<!DOCTYPE html>\n" + html], {type: 'text/html'});
+		const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click();
+	}
+
+    if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', render);
+	} else {
+		render();
+	}
+	
+	function updateFocalPicker() {
+		const imgVal = document.getElementById('p-img').value.trim();
+		const firstImg = imgVal.split(',')[0].trim();
+		const picker = document.getElementById('focal-picker');
+		if (firstImg) {
+			document.getElementById('focal-img').src = firstImg;
+			picker.style.display = 'block';
+			updateFocalDot();
+		} else {
+			picker.style.display = 'none';
+		}
+	}
+
+	function updateFocalDot() {
+		const pos = document.getElementById('p-imgpos').value.trim() || '50% 50%';
+		const parts = pos.split(' ');
+		const x = parts[0] || '50%';
+		const y = parts[1] || '50%';
+		const dot = document.getElementById('focal-dot');
+		dot.style.left = x;
+		dot.style.top = y;
+	}
+
+	function setFocalPoint(e) {
+		const picker = document.getElementById('focal-picker');
+		const rect = picker.getBoundingClientRect();
+		const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+		const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+		document.getElementById('p-imgpos').value = `${x}% ${y}%`;
+		updateFocalDot();
+	}
 </script>
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
+
+
+</body></html>
