@@ -471,29 +471,38 @@ I founded Elevated Candles as both a product business and a live analytical envi
     function removeStructure(s) { if(confirm("Remove Node?")) { structure = structure.filter(i => i !== s); render(); } }
 
     function openModal(id) {
-        const p = projects.find(x => x.id === id);
-        document.getElementById('detail-modal').scrollTop = 0;
-        document.getElementById('modal-title').innerText = p.title;
-        document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
-        document.getElementById('modal-body').innerHTML = p.detail || p.desc;
-		document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src =>
-			`<div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('${src.trim()}')">
-				<img src="${src.trim()}" class="gallery-preview" loading="lazy" alt="" style="object-fit: ${p.imgFit || 'contain'}; object-position: ${p.imgPos || 'center'};">
-				<div class="zoom-overlay">
-					<i data-lucide="maximize-2"></i>
-				</div>
-			</div>`
-		).join('') : '';
-        document.getElementById('modal-links').innerHTML = p.links ? p.links.split(',').map(l => {
-            const parts = l.split(':');
-            const label = parts.shift().trim();
-            const url = parts.join(':').trim();
-            return `<a href="${url}" target="_blank" class="btn">${label}</a>`;
-        }).join('') : '';
-        document.getElementById('detail-modal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        lucide.createIcons();
-    }
+    const p = projects.find(x => x.id === id);
+    const modal = document.getElementById('detail-modal'); // Define it as a variable for cleaner code
+    
+    document.getElementById('modal-title').innerText = p.title;
+    document.getElementById('modal-cat').innerText = `DATA_ENTRY // ${p.category}`;
+    document.getElementById('modal-body').innerHTML = p.detail || p.desc;
+    
+    document.getElementById('modal-gallery').innerHTML = p.img ? p.img.split(',').map(src =>
+        `<div class="image-wrapper" onclick="event.stopPropagation(); zoomImage('${src.trim()}')">
+            <img src="${src.trim()}" class="gallery-preview" loading="lazy" alt="" style="object-fit: ${p.imgFit || 'contain'}; object-position: ${p.imgPos || 'center'};">
+            <div class="zoom-overlay">
+                <i data-lucide="maximize-2"></i>
+            </div>
+        </div>`
+    ).join('') : '';
+
+    document.getElementById('modal-links').innerHTML = p.links ? p.links.split(',').map(l => {
+        const parts = l.split(':');
+        const label = parts.shift().trim();
+        const url = parts.join(':').trim();
+        return `<a href="${url}" target="_blank" class="btn">${label}</a>`;
+    }).join('') : '';
+
+    // 1. Show the modal first
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // 2. Reset the scroll position AFTER it is visible
+    modal.scrollTop = 0; 
+    
+    lucide.createIcons();
+}
 
     function closeModal() {
         document.getElementById('detail-modal').style.display = 'none';
