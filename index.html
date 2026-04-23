@@ -262,7 +262,7 @@ CORE FINDING: Undesirable behavior is a failure of constraint design, not agent 
   <iframe src="https://www.youtube.com/embed/Xr8C48Qo_ao?rel=0" style="width: 100%; aspect-ratio: 16/9; border: none;" allowfullscreen="">
   </iframe>
 </div></div>
-        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;" onclick="event.stopPropagation()"><a href="https://docs.google.com/document/d/1fE2zPgwQRz3GF0S_QHca3DMJRjqS2OnE_kWSKki3M8M/edit?usp=sharing" target="_blank" class="btn">PAPER</a><a href="https://youtu.be/Xr8C48Qo_ao?rel=0&amp;modestbranding=1" target="_blank" class="btn">VIDEO</a></div>
+        <div id="modal-links" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;" onclick="event.stopPropagation()"><a href="docs/CSC525_Module8PP_Opt1_Hall_John.pdf" target="_blank" class="btn">PAPER</a><a href="https://youtu.be/Xr8C48Qo_ao?rel=0&amp;modestbranding=1" target="_blank" class="btn">VIDEO</a></div>
         <button class="btn" style="margin-top:40px; border-color:var(--muted); color:var(--muted)" onclick="event.stopPropagation(); closeModal()" fdprocessedid="8ei42j">Close_Terminal</button>
     </div>
 </div>
@@ -509,9 +509,10 @@ CORE FINDING: Undesirable behavior is a failure of constraint design, not agent 
         lucide.createIcons();
     }
 
-    function closeModal() {
-        document.getElementById('detail-modal').style.display = 'none';
+    function closeModal() { 
+        document.getElementById('detail-modal').style.display = 'none'; 
         document.body.style.overflow = 'auto';
+        document.querySelectorAll('#detail-modal iframe').forEach(f => f.src = f.src);
     }
 	
 	function zoomImage(src) {
